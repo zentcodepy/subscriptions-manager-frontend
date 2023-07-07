@@ -4,10 +4,13 @@ import axios from 'axios';
 
 const email = ref('');
 const password = ref('');
+const showLoading = ref(false);
 
 function submit(event: Event){
     event.preventDefault();
-    alert("send")
+
+    showLoading.value = true;
+
     const url = '/api/sanctum/csrf-cookie';
     axios
         .get(url)
@@ -16,7 +19,11 @@ function submit(event: Event){
                 doLogin();
             }
         })
-        .catch(error => (console.log(error)));
+        .catch(error => {
+            showLoading.value = false;
+            console.log(error);
+            alert("Error");
+        });
 }
 
 function doLogin(){
@@ -27,6 +34,7 @@ function doLogin(){
             password: password.value
         })
         .then(response => {
+            showLoading.value = false;
             if (response.status == 200) {
                 alert("Successful login")
             }
@@ -35,6 +43,7 @@ function doLogin(){
             }
         })
         .catch(error => {
+            showLoading.value = false;
             console.log(error);
             alert("Error");
         })
@@ -43,6 +52,7 @@ function doLogin(){
 
 <template>
     <form @submit="submit">
+        <h1 v-show="showLoading">Loading...</h1>
         <div>
             <label for="email">Email</label>
             <br>
