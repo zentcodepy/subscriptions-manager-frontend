@@ -39,13 +39,17 @@ function doLogin(){
                 alert("Successful login")
             }
             else {
-                alert("Invalid credentials");
+                alert("Other");//Todo
             }
         })
         .catch(error => {
             showLoading.value = false;
             console.log(error);
-            alert("Error");
+            if (error.response.data.message != undefined) {
+                alert(error.response.data.message);
+            } else {
+                alert("Error");
+            }
         })
 }
 </script>
