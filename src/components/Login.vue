@@ -27,7 +27,7 @@ function submit(event: Event){
 }
 
 function doLogin(){
-    const url = '/api/login';
+    const url = '/api/api/login';
     axios
         .post(url, {
             email: email.value,
