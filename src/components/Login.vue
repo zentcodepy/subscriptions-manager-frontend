@@ -11,7 +11,7 @@ function submit(event: Event){
 
     showLoading.value = true;
 
-    const url = '/api/sanctum/csrf-cookie';
+    const url = '/base-url/sanctum/csrf-cookie';
     axios
         .get(url)
         .then(response => {
@@ -27,7 +27,7 @@ function submit(event: Event){
 }
 
 function doLogin(){
-    const url = '/api/api/login';
+    const url = '/base-url/api/login';
     axios
         .post(url, {
             email: email.value,

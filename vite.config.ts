@@ -6,10 +6,10 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     proxy: {
-      '/api': {
+      '/base-url': {
         target: 'http://192.168.38.8:8000', // Replace with your API endpoint
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, '') // Remove the '/api' prefix when making requests
+        rewrite: path => path.replace(/^\/base-url/, '') // Remove the '/api' prefix when making requests
       }
     }
   }
