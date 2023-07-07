@@ -36,6 +36,8 @@ function doLogin(){
         .then(response => {
             showLoading.value = false;
             if (response.status == 200) {
+                email.value = '';
+                password.value = '';
                 alert("Successful login")
             }
             else {
