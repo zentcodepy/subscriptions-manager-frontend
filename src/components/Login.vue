@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 
 const email = ref('');
 const password = ref('');
 const showLoading = ref(false);
+const router = useRouter();
 
 function submit(event: Event){
     event.preventDefault();
@@ -38,7 +40,7 @@ function doLogin(){
             if (response.status == 200) {
                 email.value = '';
                 password.value = '';
-                alert("Successful login")
+                router.push('/dashboard');
             }
             else {
                 alert("Other");//Todo
