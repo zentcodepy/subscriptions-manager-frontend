@@ -34,10 +34,9 @@
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
                             <!-- Current: "bg-indigo-900 text-white", Default: "text-indigo-300 hover:bg-indigo-700 hover:text-white" -->
-                            <a href="/" class="bg-indigo-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                                aria-current="page">Dashboard</a>
-                            <a href="#"
-                                class="text-indigo-300 hover:bg-indigo-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Customers</a>
+                            <router-link to="/" class="text-indigo-300 hover:bg-indigo-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                                Dashboard
+                            </router-link>
                         </div>
                     </div>
                 </div>
@@ -48,13 +47,17 @@
         <div class="sm:hidden" id="mobile-menu">
             <div class="space-y-1 px-2 pb-3 pt-2">
                 <!-- Current: "bg-indigo-900 text-white", Default: "text-indigo-300 hover:bg-indigo-700 hover:text-white" -->
-                <a href="/" class="bg-indigo-900 text-white block rounded-md px-3 py-2 text-base font-medium"
-                    aria-current="page">Dashboard
-                </a>
-                <a href="#"
-                    class="text-indigo-300 hover:bg-indigo-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Customers
-                </a>
+                <router-link to="/" class="text-indigo-300 block rounded-md px-3 py-2 text-base font-medium">
+                    Dashboard
+                </router-link>
             </div>
         </div>
     </nav>
 </template>
+
+<style scoped>
+.router-link-active{
+    color:white;
+    background-color: rgb(67 56 202 / var(--tw-bg-opacity));
+}
+</style>
