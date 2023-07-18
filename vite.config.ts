@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/base-url': {
-        target: 'http://192.168.38.8:8000', // Replace with your API endpoint
+        target: 'http://localhost:8000', // Replace with your API endpoint
         changeOrigin: true,
         rewrite: path => path.replace(/^\/base-url/, '') // Remove the '/api' prefix when making requests
       }
