@@ -41,7 +41,7 @@ function doLogin(){
             if (response.status == 200) {
                 email.value = '';
                 password.value = '';
-                router.push('/dashboard');
+                router.push('/');
             }
             else {
                 alert("Other");//Todo

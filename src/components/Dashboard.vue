@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import AppLayout from '../components/AppLayout.vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+
+let userIsLoggedIn = ref(false);
 
 const router = useRouter();
 
@@ -10,6 +14,8 @@ const url = '/base-url/api/user';
         .then(response => {
             if (response.status == 401 || response.status == 403) {
                 router.push('/login');                
+            } else if (response.status == 200) {
+              userIsLoggedIn.value = true;
             }
         })
         .catch(error => {
@@ -26,7 +32,7 @@ function showErrorMessage(){
 }
 </script>
 <template>
-    <div>
-        <h1>Dashboard</h1>
-    </div>
+    <AppLayout>
+        <h2>Dashboard</h2>
+    </AppLayout>
 </template>

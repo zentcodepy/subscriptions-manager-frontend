@@ -14,6 +14,7 @@
 ### Built With
 * [Vue.js](https://vuejs.org/)
 * [npm](https://www.npmjs.com/)
+* [Tailwind UI](https://tailwindui.com/)
 
 ### License
 This project is licensed under the [MIT](https://opensource.org/licenses/MIT).
