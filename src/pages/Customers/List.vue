@@ -2,12 +2,7 @@
 import AppLayout from '../../components/AppLayout.vue';
 import axios from 'axios';
 import { ref } from 'vue';
-
-interface Customer {
-    id: number;
-    business_name: string;
-    document_number: string;
-}
+import { Customer } from '../../types/Customer';
 
 let customers = ref<Customer[]>([]);
 
