@@ -3,6 +3,7 @@ import AppLayout from '../../components/AppLayout.vue';
 import axios from 'axios';
 import { ref } from 'vue';
 import { Customer } from '../../types/Customer';
+import CustomerFilters from './Partials/CustomerFilters.vue';
 
 let customers = ref<Customer[]>([]);
 
@@ -17,10 +18,29 @@ axios
     .catch((error) => {
         console.log(error)
     });
+
+function inputSelected(inputValue: string) {
+    const url = '/base-url/api/customers';
+    axios
+        .get(url, {
+            params: {
+                search: inputValue
+            }
+        })
+        .then((response) => {
+            if (response.status == 200) {
+                customers.value = response.data['data'];
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        });
+}
 </script>
 <template>
     <AppLayout>
         <div class="m-5">
+            <CustomerFilters class="m-5" @input-emitted="inputSelected"></CustomerFilters>
             <table class="table-auto min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
