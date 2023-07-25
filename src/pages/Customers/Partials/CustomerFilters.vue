@@ -10,9 +10,9 @@ function handleInput() {
 }
 </script>
 <template>
-    <div class="grid grid-cols-4 gap-4">
+    <div class="grid grid-cols-3 gap-4">
         <TextInput
-            placeholder="Business Name"
+            placeholder="Business Name or Document Number"
             v-model="businessName"
             @input="handleInput()">
         </TextInput>
