@@ -3,7 +3,13 @@ import AppLayout from '../../components/AppLayout.vue';
 import axios from 'axios';
 import { ref } from 'vue';
 
-let customers = ref([]);
+interface Customer {
+    id: number;
+    business_name: string;
+    document_number: string;
+}
+
+let customers = ref<Customer[]>([]);
 
 const url = '/base-url/api/customers';
 axios
