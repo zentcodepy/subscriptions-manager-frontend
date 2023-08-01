@@ -2,8 +2,11 @@
 import AppLayout from '../../components/AppLayout.vue';
 import axios from 'axios';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { Customer } from '../../types/Customer';
 import CustomerFilters from './Partials/CustomerFilters.vue';
+
+const router = useRouter();
 
 let customers = ref<Customer[]>([]);
 
@@ -16,6 +19,9 @@ axios
         }
     })
     .catch((error) => {
+        if (error.response.status == 401 || error.response.status == 403) {
+                router.push('/login');
+        }
         console.log(error)
     });
 
@@ -33,6 +39,9 @@ function inputSelected(inputValue: string) {
             }
         })
         .catch((error) => {
+            if (error.response.status == 401 || error.response.status == 403) {
+                router.push('/login');
+            }
             console.log(error)
         });
 }
