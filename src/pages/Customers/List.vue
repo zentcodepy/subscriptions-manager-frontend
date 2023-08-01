@@ -44,10 +44,10 @@ function noCustomers() {
 <template>
     <AppLayout>
         <div class="m-5">
-            <CustomerFilters class="m-5" @input-emitted="fetchCustomers"></CustomerFilters>
-            <div v-if="showLoading" class="flex justify-center">
-                <Spinner />
+            <div v-if="showLoading" class="relative">
+                <Spinner class="absolute top-1/2 left-1/2"/>
             </div>
+            <CustomerFilters class="m-5" @input-emitted="fetchCustomers"></CustomerFilters>
             <table class="table-auto min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
