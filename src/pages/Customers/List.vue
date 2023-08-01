@@ -16,13 +16,14 @@ let customers = ref<Customer[]>([]);
 
 fetchCustomers();
 
-function fetchCustomers(inputValue?: string) {
+function fetchCustomers(inputValue?: string, pageNumber?: number) {
     showLoading.value = true;
     const url = '/base-url/api/customers';
     axios
         .get(url, {
             params: {
-                search: inputValue
+                search: inputValue,
+                page: pageNumber
             }
         })
         .then((response) => {
@@ -57,7 +58,7 @@ function noCustomers() {
                 <Spinner class="absolute top-1/2 left-1/2" />
             </div>
             <CustomerFilters class="m-5" @input-emitted="fetchCustomers"></CustomerFilters>
-            <!-- <CustomerListPagination :number-of-pages="numberOfPages" :total="total"/> -->
+            <CustomerListPagination :number-of-pages="numberOfPages" :total="total" @page-number-emitted="fetchCustomers('', $event)"/>
             <table class="table-auto min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>

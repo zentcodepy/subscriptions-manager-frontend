@@ -3,6 +3,12 @@ const props = defineProps({
     numberOfPages: Number,
     total: Number
 });
+
+const emit = defineEmits(['page-number-emitted']);
+
+function selectPage(pageNumber: Number) {
+    emit('page-number-emitted', pageNumber);
+}
 </script>
 <template>
     <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
@@ -15,11 +21,12 @@ const props = defineProps({
         <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
             <div>
                 <p class="text-sm text-gray-700">
-                    Showing
+                    <!-- Showing
                     <span class="font-medium">1</span>
                     to
                     <span class="font-medium">20</span>
-                    of
+                    of -->
+                    Total:
                     <span class="font-medium">{{ props.total }}</span>
                     results
                 </p>
@@ -39,7 +46,8 @@ const props = defineProps({
                     <a href="#"
                         aria-current="page"
                         class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-                        v-for="pageNumber in props.numberOfPages"    
+                        v-for="pageNumber in props.numberOfPages"
+                        @click="selectPage(pageNumber)"
                     >
                         {{ pageNumber }}
                     </a>
