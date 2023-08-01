@@ -45,6 +45,10 @@ function inputSelected(inputValue: string) {
             console.log(error)
         });
 }
+
+function noCustomers() {
+    return customers.value.length == 0 ? true : false;
+}
 </script>
 <template>
     <AppLayout>
@@ -62,14 +66,19 @@ function inputSelected(inputValue: string) {
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    <tr v-for="customer in customers">
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">{{ customer.business_name }}</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">{{ customer.document_number }}</div>
-                        </td>
-                    </tr>
+                    <template v-if="noCustomers()">
+                        <h2 class="px-6 py-4 text-sm text-gray-900">No customers found</h2>
+                    </template>
+                    <template v-else>
+                        <tr v-for="customer in customers">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">{{ customer.business_name }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">{{ customer.document_number }}</div>
+                            </td>
+                        </tr>
+                    </template>
                 </tbody>
             </table>
         </div>
