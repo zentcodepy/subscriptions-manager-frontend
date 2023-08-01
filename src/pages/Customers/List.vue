@@ -5,8 +5,11 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Customer } from '../../types/Customer';
 import CustomerFilters from './Partials/CustomerFilters.vue';
+import CustomerListPagination from './Partials/CustomerListPagination.vue';
 import Spinner from '../../components/common/Spinner.vue';
 
+let numberOfPages: number = 0;
+let total: number = 0;
 const router = useRouter();
 const showLoading = ref<boolean>(false);
 let customers = ref<Customer[]>([]);
@@ -26,6 +29,8 @@ function fetchCustomers(inputValue?: string) {
             showLoading.value = false;
             if (response.status == 200) {
                 customers.value = response.data['data'];
+                numberOfPages = response.data['meta'].last_page;
+                total = response.data['meta'].total;
             }
         })
         .catch((error) => {
@@ -52,6 +57,7 @@ function noCustomers() {
                 <Spinner class="absolute top-1/2 left-1/2" />
             </div>
             <CustomerFilters class="m-5" @input-emitted="fetchCustomers"></CustomerFilters>
+            <!-- <CustomerListPagination :number-of-pages="numberOfPages" :total="total"/> -->
             <table class="table-auto min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
