@@ -10,22 +10,9 @@ const router = useRouter();
 
 let customers = ref<Customer[]>([]);
 
-const url = '/base-url/api/customers';
-axios
-    .get(url)
-    .then((response) => {
-        if (response.status == 200) {
-            customers.value = response.data['data'];
-        }
-    })
-    .catch((error) => {
-        if (error.response.status == 401 || error.response.status == 403) {
-                router.push('/login');
-        }
-        console.log(error)
-    });
+fetchCustomers();
 
-function inputSelected(inputValue: string) {
+function fetchCustomers(inputValue?: string) {
     const url = '/base-url/api/customers';
     axios
         .get(url, {
@@ -53,7 +40,7 @@ function noCustomers() {
 <template>
     <AppLayout>
         <div class="m-5">
-            <CustomerFilters class="m-5" @input-emitted="inputSelected"></CustomerFilters>
+            <CustomerFilters class="m-5" @input-emitted="fetchCustomers"></CustomerFilters>
             <table class="table-auto min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
