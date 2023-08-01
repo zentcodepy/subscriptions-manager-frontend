@@ -38,14 +38,18 @@ function fetchCustomers(inputValue?: string) {
 }
 
 function noCustomers() {
-    return customers.value.length == 0 ? true : false;
+    if (showLoading.value) {
+        return false;//still loading
+    } else {
+        return customers.value.length == 0 ? true : false;
+    }
 }
 </script>
 <template>
     <AppLayout>
         <div class="m-5">
             <div v-if="showLoading" class="relative">
-                <Spinner class="absolute top-1/2 left-1/2"/>
+                <Spinner class="absolute top-1/2 left-1/2" />
             </div>
             <CustomerFilters class="m-5" @input-emitted="fetchCustomers"></CustomerFilters>
             <table class="table-auto min-w-full divide-y divide-gray-200">
