@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import TextInput from '../../../components/common/TextInput.vue';
+import debounce from '../../../utils/debounce.js';
 
 const emit = defineEmits(['input-emitted']);
 const businessName = ref('');
 
+const debouncedEmitInput = debounce(() => { emit('input-emitted', businessName.value) }, 300);
+
 function handleInput() {
-    emit('input-emitted', businessName.value)
+    debouncedEmitInput();
 }
 </script>
 <template>
