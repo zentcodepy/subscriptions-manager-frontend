@@ -7,17 +7,13 @@ const emit = defineEmits(['input-emitted']);
 const businessName = ref('');
 
 const debouncedEmitInput = debounce(() => { emit('input-emitted', businessName.value) }, 300);
-
-function handleInput() {
-    debouncedEmitInput();
-}
 </script>
 <template>
     <div class="grid grid-cols-3 gap-4">
         <TextInput
             placeholder="Business Name or Document Number"
             v-model="businessName"
-            @input="handleInput()">
+            @input="debouncedEmitInput">
         </TextInput>
     </div>
 </template>
