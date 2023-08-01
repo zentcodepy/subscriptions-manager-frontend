@@ -5,14 +5,16 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Customer } from '../../types/Customer';
 import CustomerFilters from './Partials/CustomerFilters.vue';
+import Spinner from '../../components/common/Spinner.vue';
 
 const router = useRouter();
-
+const showLoading = ref<boolean>(false);
 let customers = ref<Customer[]>([]);
 
 fetchCustomers();
 
 function fetchCustomers(inputValue?: string) {
+    showLoading.value = true;
     const url = '/base-url/api/customers';
     axios
         .get(url, {
@@ -21,11 +23,13 @@ function fetchCustomers(inputValue?: string) {
             }
         })
         .then((response) => {
+            showLoading.value = false;
             if (response.status == 200) {
                 customers.value = response.data['data'];
             }
         })
         .catch((error) => {
+            showLoading.value = false;
             if (error.response.status == 401 || error.response.status == 403) {
                 router.push('/login');
             }
@@ -41,6 +45,9 @@ function noCustomers() {
     <AppLayout>
         <div class="m-5">
             <CustomerFilters class="m-5" @input-emitted="fetchCustomers"></CustomerFilters>
+            <div v-if="showLoading" class="flex justify-center">
+                <Spinner />
+            </div>
             <table class="table-auto min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
