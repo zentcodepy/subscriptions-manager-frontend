@@ -10,7 +10,7 @@ const props = defineProps({
 const emit = defineEmits(['page-number-emitted']);
 
 function isCurrentPage(pageNumber: Number) {
-    return pageNumber == props.currentPage ? 'text-indigo-600' : '';
+    return pageNumber == props.currentPage ? 'bg-indigo-600 text-white hover:text-black' : '';
 }
 
 function selectPage(pageNumber: Number) {
@@ -52,12 +52,11 @@ function selectPage(pageNumber: Number) {
                     <a href="#"
                         aria-current="page"
                         class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                        :class="isCurrentPage(pageNumber)"
                         v-for="pageNumber in props.pagesNumber"
                         @click="selectPage(pageNumber)"
                     >
-                        <span :class="isCurrentPage(pageNumber)">
-                            {{ pageNumber }}
-                        </span>
+                        {{ pageNumber }}
                     </a>
                 <!-- <a href="#"
                     class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
