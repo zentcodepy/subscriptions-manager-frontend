@@ -57,8 +57,15 @@ function noCustomers() {
             <div v-if="showLoading" class="relative">
                 <Spinner class="absolute top-1/2 left-1/2" />
             </div>
-            <CustomerFilters class="m-5" @input-emitted="fetchCustomers"></CustomerFilters>
-            <ListPagination :number-of-pages="numberOfPages" :total="total" @page-number-emitted="fetchCustomers('', $event)"/>
+            <CustomerFilters
+                class="m-5"
+                @input-emitted="fetchCustomers"
+            />
+            <ListPagination
+                :number-of-pages="numberOfPages"
+                :total="total"
+                @page-number-emitted="fetchCustomers('', $event)"
+            />
             <table class="table-auto min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
