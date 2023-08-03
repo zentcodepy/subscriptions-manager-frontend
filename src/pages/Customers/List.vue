@@ -5,7 +5,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Customer } from '../../types/Customer';
 import CustomerFilters from './Partials/CustomerFilters.vue';
-import CustomerListPagination from './Partials/CustomerListPagination.vue';
+import ListPagination from '../../components/common/ListPagination.vue';
 import Spinner from '../../components/common/Spinner.vue';
 
 let numberOfPages: number = 0;
@@ -58,7 +58,7 @@ function noCustomers() {
                 <Spinner class="absolute top-1/2 left-1/2" />
             </div>
             <CustomerFilters class="m-5" @input-emitted="fetchCustomers"></CustomerFilters>
-            <CustomerListPagination :number-of-pages="numberOfPages" :total="total" @page-number-emitted="fetchCustomers('', $event)"/>
+            <ListPagination :number-of-pages="numberOfPages" :total="total" @page-number-emitted="fetchCustomers('', $event)"/>
             <table class="table-auto min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
