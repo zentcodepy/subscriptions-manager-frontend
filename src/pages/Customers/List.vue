@@ -28,12 +28,9 @@ function fetchCustomers(inputValue?: string, pageNumber?: number) {
         .then((response) => {
             showLoading.value = false;
             if (response.status == 200) {
-                customers.value = response.data['data'];
-                paginationData.value.from = response.data['meta'].from;
-                paginationData.value.to = response.data['meta'].to;
-                paginationData.value.total = response.data['meta'].total;
-                paginationData.value.currentPage = response.data['meta'].current_page;
-                paginationData.value.pagesNumber = response.data['meta'].last_page;
+                const { data, meta } = response.data;
+                customers.value = data;
+                setPaginationData(meta);
             }
         })
         .catch((error) => {
@@ -43,6 +40,14 @@ function fetchCustomers(inputValue?: string, pageNumber?: number) {
             }
             console.log(error)
         });
+}
+
+function setPaginationData(meta: any) {
+    paginationData.value.from = meta.from;
+    paginationData.value.to = meta.to;
+    paginationData.value.total = meta.total;
+    paginationData.value.currentPage = meta.current_page;
+    paginationData.value.pagesNumber = meta.last_page;
 }
 
 function noCustomers() {
