@@ -51,11 +51,8 @@ function setPaginationData(meta: any) {
 }
 
 function noCustomers() {
-    if (showLoading.value) {
-        return false;//still loading
-    } else {
-        return customers.value.length == 0 ? true : false;
-    }
+    // if loading spinner is showing hide nocustomers message
+    return showLoading.value ? false : customers.value.length === 0;
 }
 </script>
 <template>
