@@ -1,16 +1,23 @@
 <script setup lang="ts">
+import { Pagination } from '../../types/Pagination';
+
 const props = defineProps({
-    from: Number,
-    to: Number,
-    total: Number,
-    currentPage: Number,
-    pagesNumber: Number,
+    paginationData: {
+        type: Object as () => Pagination,
+        default: {
+            from: 0,
+            to: 0,
+            total: 0,
+            currentPage: 0,
+            pagesNumber: 0,
+        }
+    }
 });
 
 const emit = defineEmits(['page-number-emitted']);
 
 function isCurrentPage(pageNumber: Number) {
-    return pageNumber == props.currentPage ? 'bg-indigo-600 text-white hover:text-black' : '';
+    return pageNumber == props.paginationData.currentPage ? 'bg-indigo-600 text-white hover:text-black' : '';
 }
 
 function selectPage(pageNumber: Number) {
@@ -29,11 +36,11 @@ function selectPage(pageNumber: Number) {
             <div>
                 <p class="text-sm text-gray-700">
                     Showing
-                    <span class="font-medium">{{ props.from }}</span>
+                    <span class="font-medium">{{ props.paginationData.from }}</span>
                     to
-                    <span class="font-medium">{{ props.to }}</span>
+                    <span class="font-medium">{{ props.paginationData.to }}</span>
                     of
-                    <span class="font-medium">{{ props.total }}</span>
+                    <span class="font-medium">{{ props.paginationData.total }}</span>
                     results
                 </p>
             </div>
@@ -53,7 +60,7 @@ function selectPage(pageNumber: Number) {
                         aria-current="page"
                         class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
                         :class="isCurrentPage(pageNumber)"
-                        v-for="pageNumber in props.pagesNumber"
+                        v-for="pageNumber in props.paginationData.pagesNumber"
                         @click="selectPage(pageNumber)"
                     >
                         {{ pageNumber }}

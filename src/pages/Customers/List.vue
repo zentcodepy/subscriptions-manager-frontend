@@ -9,13 +9,13 @@ import CustomerFilters from './Partials/CustomerFilters.vue';
 import ListPagination from '../../components/common/ListPagination.vue';
 import Spinner from '../../components/common/Spinner.vue';
 
-let paginationData: Pagination = {
+let paginationData = ref<Pagination>({
     from: 0,
     to: 0,
     total: 0,
     currentPage: 0,
     pagesNumber: 0,
-};
+});
 const router = useRouter();
 const showLoading = ref<boolean>(false);
 let customers = ref<Customer[]>([]);
@@ -36,11 +36,11 @@ function fetchCustomers(inputValue?: string, pageNumber?: number) {
             showLoading.value = false;
             if (response.status == 200) {
                 customers.value = response.data['data'];
-                paginationData.from = response.data['meta'].from;
-                paginationData.to = response.data['meta'].to;
-                paginationData.total = response.data['meta'].total;
-                paginationData.currentPage = response.data['meta'].current_page;
-                paginationData.pagesNumber = response.data['meta'].last_page;
+                paginationData.value.from = response.data['meta'].from;
+                paginationData.value.to = response.data['meta'].to;
+                paginationData.value.total = response.data['meta'].total;
+                paginationData.value.currentPage = response.data['meta'].current_page;
+                paginationData.value.pagesNumber = response.data['meta'].last_page;
             }
         })
         .catch((error) => {
@@ -71,11 +71,7 @@ function noCustomers() {
                 @input-emitted="fetchCustomers"
             />
             <ListPagination
-                :from="paginationData.from"
-                :to="paginationData.to"
-                :total="paginationData.total"
-                :current-page="paginationData.currentPage"
-                :pages-number="paginationData.pagesNumber"
+                :pagination-data="paginationData"
                 @page-number-emitted="fetchCustomers('', $event)"
             />
             <table class="table-auto min-w-full divide-y divide-gray-200">
