@@ -9,6 +9,8 @@ import ListPagination from '../../components/common/ListPagination.vue';
 import Spinner from '../../components/common/Spinner.vue';
 
 let numberOfPages: number = 0;
+let from: number = 0;
+let to: number = 0;
 let total: number = 0;
 const router = useRouter();
 const showLoading = ref<boolean>(false);
@@ -31,6 +33,8 @@ function fetchCustomers(inputValue?: string, pageNumber?: number) {
             if (response.status == 200) {
                 customers.value = response.data['data'];
                 numberOfPages = response.data['meta'].last_page;
+                from = response.data['meta'].from;
+                to = response.data['meta'].to;
                 total = response.data['meta'].total;
             }
         })
@@ -63,6 +67,8 @@ function noCustomers() {
             />
             <ListPagination
                 :number-of-pages="numberOfPages"
+                :from="from"
+                :to="to"
                 :total="total"
                 @page-number-emitted="fetchCustomers('', $event)"
             />

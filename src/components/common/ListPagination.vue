@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const props = defineProps({
     numberOfPages: Number,
+    from: Number,
+    to: Number,
     total: Number
 });
 
@@ -21,12 +23,11 @@ function selectPage(pageNumber: Number) {
         <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
             <div>
                 <p class="text-sm text-gray-700">
-                    <!-- Showing
-                    <span class="font-medium">1</span>
+                    Showing
+                    <span class="font-medium">{{ props.from }}</span>
                     to
-                    <span class="font-medium">20</span>
-                    of -->
-                    Total:
+                    <span class="font-medium">{{ props.to }}</span>
+                    of
                     <span class="font-medium">{{ props.total }}</span>
                     results
                 </p>
