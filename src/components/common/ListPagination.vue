@@ -1,9 +1,9 @@
 <script setup lang="ts">
 const props = defineProps({
-    numberOfPages: Number,
+    pagesNumber: Number,
     from: Number,
     to: Number,
-    total: Number
+    total: Number,
 });
 
 const emit = defineEmits(['page-number-emitted']);
@@ -47,7 +47,7 @@ function selectPage(pageNumber: Number) {
                     <a href="#"
                         aria-current="page"
                         class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-                        v-for="pageNumber in props.numberOfPages"
+                        v-for="pageNumber in props.pagesNumber"
                         @click="selectPage(pageNumber)"
                     >
                         {{ pageNumber }}
