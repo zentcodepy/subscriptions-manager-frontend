@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import AppLayout from '../../components/AppLayout.vue';
-import axios from 'axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Customer } from '../../types/Customer';
@@ -8,6 +7,7 @@ import { Pagination } from '../../types/Pagination';
 import CustomerFilters from './Partials/CustomerFilters.vue';
 import ListPagination from '../../components/common/ListPagination.vue';
 import Spinner from '../../components/common/Spinner.vue';
+import { getCustomers } from '../../services/CustomerService.ts';
 
 let paginationData = ref<Pagination>({
     from: 0,
@@ -24,14 +24,7 @@ fetchCustomers();
 
 function fetchCustomers(inputValue?: string, pageNumber?: number) {
     showLoading.value = true;
-    const url = '/base-url/api/customers';
-    axios
-        .get(url, {
-            params: {
-                search: inputValue,
-                page: pageNumber
-            }
-        })
+    getCustomers(inputValue, pageNumber)
         .then((response) => {
             showLoading.value = false;
             if (response.status == 200) {
