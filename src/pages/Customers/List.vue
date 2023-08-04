@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AppLayout from '../../components/AppLayout.vue';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { Customer } from '../../types/Customer';
 import { Pagination } from '../../types/Pagination';
@@ -20,7 +20,9 @@ const router = useRouter();
 const showLoading = ref<boolean>(false);
 let customers = ref<Customer[]>([]);
 
-fetchCustomers();
+onMounted(() => {
+    fetchCustomers()
+});
 
 function fetchCustomers(inputValue?: string, pageNumber?: number) {
     showLoading.value = true;
