@@ -9,16 +9,16 @@ import ListPagination from '../../components/common/ListPagination.vue';
 import Spinner from '../../components/common/Spinner.vue';
 import { getCustomers } from '../../services/CustomerService.ts';
 
-let paginationData = ref<Pagination>({
+const paginationData = ref<Pagination>({
     from: 0,
     to: 0,
     total: 0,
     currentPage: 0,
     pagesNumber: 0,
 });
+const customers = ref<Customer[]>([]);
 const router = useRouter();
 const showLoading = ref<boolean>(false);
-let customers = ref<Customer[]>([]);
 
 onMounted(() => {
     fetchCustomers()
