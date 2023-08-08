@@ -35,13 +35,6 @@ function fetchCustomers(inputValue?: string, pageNumber?: number) {
                 setPaginationData(meta);
             }
         })
-        .catch((error) => {
-            showLoading.value = false;
-            if (error.response.status == 401 || error.response.status == 403) {
-                router.push('/login');
-            }
-            console.log(error)
-        });
 }
 
 function setPaginationData(meta: any) {
