@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import AppLayout from '../../components/AppLayout.vue';
 import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
 import { Customer } from '../../types/Customer';
 import { Pagination } from '../../types/Pagination';
 import CustomerFilters from './Partials/CustomerFilters.vue';
@@ -17,7 +16,6 @@ const paginationData = ref<Pagination>({
     pagesNumber: 0,
 });
 const customers = ref<Customer[]>([]);
-const router = useRouter();
 const showLoading = ref<boolean>(false);
 
 onMounted(() => {
