@@ -8,9 +8,19 @@ export function interceptResponse() {
       return config;
     },
     function (error) {
-      if (error.response.status == 401 || error.response.status == 403) {
-        router.push("/login");
+      const statusCode = error.response.status;
+
+      switch (statusCode) {
+        case 401:
+          router.push("/login");
+          break;
+        case 403:
+          router.push("/login");
+        default:
+          alert("error");
+          break;
       }
+
       return Promise.reject(error);
     }
   );
