@@ -58,7 +58,7 @@ function selectPage(pageNumber: Number) {
                     </a>
                     <a 
                         aria-current="page"
-                        class="cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                        class="cursor-pointer transition-colors relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
                         :class="isCurrentPage(pageNumber)"
                         v-for="pageNumber in props.paginationData.pagesNumber"
                         @click="selectPage(pageNumber)"
