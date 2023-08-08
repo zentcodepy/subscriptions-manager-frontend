@@ -26,12 +26,14 @@ function fetchCustomers(inputValue?: string, pageNumber?: number) {
     showLoading.value = true;
     getCustomers(inputValue, pageNumber)
         .then((response) => {
-            showLoading.value = false;
             if (response.status == 200) {
                 const { data, meta } = response.data;
                 customers.value = data;
                 setPaginationData(meta);
             }
+        })
+        .finally(() => {
+            showLoading.value = false;
         })
 }
 
