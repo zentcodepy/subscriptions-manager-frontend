@@ -14,7 +14,7 @@ const props = defineProps({
     }
 });
 
-const emit = defineEmits(['page-number-emitted']);
+const emit = defineEmits(['page-number-emitted', 'next-page-emitted', 'previous-page-emitted']);
 
 function isCurrentPage(pageNumber: Number) {
     return pageNumber == props.paginationData.currentPage ? 'bg-indigo-600 text-white hover:text-black' : '';
@@ -46,7 +46,8 @@ function selectPage(pageNumber: Number) {
             </div>
             <div>
                 <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                    <!-- <a href="#"
+                    <a href="#"
+                        @click="$emit('previous-page-emitted')"
                         class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
                         <span class="sr-only">Previous</span>
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -54,7 +55,7 @@ function selectPage(pageNumber: Number) {
                                 d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
                                 clip-rule="evenodd" />
                         </svg>
-                    </a> -->
+                    </a>
                     <!-- Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" -->
                     <a href="#"
                         aria-current="page"
@@ -65,7 +66,8 @@ function selectPage(pageNumber: Number) {
                     >
                         {{ pageNumber }}
                     </a>
-                <!-- <a href="#"
+                <a href="#"
+                    @click="$emit('next-page-emitted')"
                     class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
                     <span class="sr-only">Next</span>
                     <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -73,7 +75,7 @@ function selectPage(pageNumber: Number) {
                             d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
                             clip-rule="evenodd" />
                     </svg>
-                </a> -->
+                </a>
             </nav>
         </div>
     </div>

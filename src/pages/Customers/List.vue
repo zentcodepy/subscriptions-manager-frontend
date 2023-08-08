@@ -56,6 +56,20 @@ function noCustomers() {
     // if loading spinner is showing hide nocustomers message
     return showLoading.value ? false : customers.value.length === 0;
 }
+
+function nextPage() {
+    const pageNumber = paginationData.value.currentPage + 1;
+    if (pageNumber <= paginationData.value.pagesNumber) {
+        fetchCustomers('', pageNumber);
+    }
+}
+
+function previousPage() {
+    const pageNumber = paginationData.value.currentPage - 1;
+    if (pageNumber > 0) {
+        fetchCustomers('', pageNumber);
+    }
+}
 </script>
 <template>
     <AppLayout>
@@ -70,6 +84,8 @@ function noCustomers() {
             <ListPagination
                 :pagination-data="paginationData"
                 @page-number-emitted="fetchCustomers('', $event)"
+                @next-page-emitted="nextPage()"
+                @previous-page-emitted="previousPage()"
             />
             <table class="table-auto min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
