@@ -5,7 +5,6 @@ import { Customer } from '../../types/Customer';
 import { Pagination } from '../../types/Pagination';
 import CustomerFilters from './Partials/CustomerFilters.vue';
 import ListPagination from '../../components/common/ListPagination.vue';
-import Spinner from '../../components/common/Spinner.vue';
 import { getCustomers } from '../../services/CustomerService.ts';
 
 const paginationData = ref<Pagination>({
@@ -16,14 +15,12 @@ const paginationData = ref<Pagination>({
     pagesNumber: 0,
 });
 const customers = ref<Customer[]>([]);
-const showLoading = ref<boolean>(false);
 
 onMounted(() => {
     fetchCustomers()
 });
 
 function fetchCustomers(inputValue?: string, pageNumber?: number) {
-    showLoading.value = true;
     getCustomers(inputValue, pageNumber)
         .then((response) => {
             if (response.status == 200) {
@@ -33,7 +30,6 @@ function fetchCustomers(inputValue?: string, pageNumber?: number) {
             }
         })
         .finally(() => {
-            showLoading.value = false;
         })
 }
 
@@ -46,8 +42,7 @@ function setPaginationData(meta: any) {
 }
 
 function noCustomers() {
-    // if loading spinner is showing hide nocustomers message
-    return showLoading.value ? false : customers.value.length === 0;
+    return customers.value.length === 0;
 }
 
 function nextPage() {
@@ -67,9 +62,6 @@ function previousPage() {
 <template>
     <AppLayout>
         <div class="m-5">
-            <div v-if="showLoading" class="relative">
-                <Spinner class="absolute top-1/2 left-1/2" />
-            </div>
             <CustomerFilters
                 class="m-5"
                 @input-emitted="fetchCustomers"

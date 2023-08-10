@@ -2,17 +2,13 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
-import Spinner from './common/Spinner.vue';
 
 const email = ref('');
 const password = ref('');
-const showLoading = ref(false);
 const router = useRouter();
 
 function submit(event: Event){
     event.preventDefault();
-
-    showLoading.value = true;
 
     const url = '/base-url/sanctum/csrf-cookie';
     axios
@@ -23,7 +19,6 @@ function submit(event: Event){
             }
         })
         .catch(error => {
-            showLoading.value = false;
             console.log(error);
             alert("Error");
         });
@@ -37,7 +32,6 @@ function doLogin(){
             password: password.value
         })
         .then(response => {
-            showLoading.value = false;
             if (response.status == 200) {
                 email.value = '';
                 password.value = '';
@@ -48,7 +42,6 @@ function doLogin(){
             }
         })
         .catch(error => {
-            showLoading.value = false;
             console.log(error);
             if (error.response.data.message != undefined) {
                 alert(error.response.data.message);
@@ -84,10 +77,7 @@ function doLogin(){
           </div>
         </div>
 
-        <div v-if="showLoading" class="flex justify-center">
-          <Spinner/>
-        </div>
-        <div v-else>
+        <div>
           <button 
             type="submit"
             class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
