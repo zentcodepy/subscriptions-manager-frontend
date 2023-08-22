@@ -16,5 +16,8 @@
 * [npm](https://www.npmjs.com/)
 * [Tailwind UI](https://tailwindui.com/)
 
+### Tests
+* Vitest is used to test the code. In order run tests, type: ```npm run test```
+
 ### License
 This project is licensed under the [MIT](https://opensource.org/licenses/MIT).

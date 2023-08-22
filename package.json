@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.14",
@@ -24,6 +25,7 @@
     "tailwindcss": "^3.3.2",
     "typescript": "^5.0.2",
     "vite": "^4.3.9",
+    "vitest": "^0.34.2",
     "vue-tsc": "^1.4.2"
   }
 }
