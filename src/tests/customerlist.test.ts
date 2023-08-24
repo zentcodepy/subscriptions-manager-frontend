@@ -1,12 +1,13 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { getCustomers } from "../services/CustomerService.ts";
+import { Customer } from "../types/Customer.js";
+import { getCustomers } from "../services/CustomerService.js";
 import axios from "axios";
 
 vi.mock("axios");
 
 describe("Customer Service", () => {
   test("makes a GET request to fetch customers", async () => {
-    const customersMock = [
+    const customersMock: Customer[] = [
       { id: 1, business_name: "Company 1", document_number: "111000-1" },
       { id: 2, business_name: "Company 2", document_number: "222000-1" },
     ];
@@ -28,7 +29,7 @@ describe("Customer Service", () => {
   });
 
   test("makes a GET request to fetch customers with filters", async () => {
-    const customersMock = [
+    const customersMock: Customer[] = [
       { id: 1, business_name: "Company 1", document_number: "111000-1" },
       { id: 2, business_name: "Company 2", document_number: "222000-1" },
     ];
