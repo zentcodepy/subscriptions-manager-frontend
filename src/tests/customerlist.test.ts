@@ -16,7 +16,7 @@ describe("Customer Service", () => {
   test("makes a GET request to fetch customers", async () => {
     const customersMock: Customer[] = getCustomerMock();
 
-    axios.get.mockResolvedValue({
+    (axios as any ).get.mockResolvedValue({
       data: customersMock,
     });
 
@@ -35,7 +35,7 @@ describe("Customer Service", () => {
   test("makes a GET request to fetch customers with filters", async () => {
     const customersMock: Customer[] = getCustomerMock();
 
-    axios.get.mockResolvedValue({
+    (axios as any ).get.mockResolvedValue({
       data: customersMock,
     });
 
