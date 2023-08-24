@@ -5,12 +5,16 @@ import axios from "axios";
 
 vi.mock("axios");
 
+function getCustomerMock() {
+  return [
+    { id: 1, business_name: "Company 1", document_number: "111000-1" },
+    { id: 2, business_name: "Company 2", document_number: "222000-1" },
+  ];
+};
+
 describe("Customer Service", () => {
   test("makes a GET request to fetch customers", async () => {
-    const customersMock: Customer[] = [
-      { id: 1, business_name: "Company 1", document_number: "111000-1" },
-      { id: 2, business_name: "Company 2", document_number: "222000-1" },
-    ];
+    const customersMock: Customer[] = getCustomerMock();
 
     axios.get.mockResolvedValue({
       data: customersMock,
@@ -29,10 +33,7 @@ describe("Customer Service", () => {
   });
 
   test("makes a GET request to fetch customers with filters", async () => {
-    const customersMock: Customer[] = [
-      { id: 1, business_name: "Company 1", document_number: "111000-1" },
-      { id: 2, business_name: "Company 2", document_number: "222000-1" },
-    ];
+    const customersMock: Customer[] = getCustomerMock();
 
     axios.get.mockResolvedValue({
       data: customersMock,
