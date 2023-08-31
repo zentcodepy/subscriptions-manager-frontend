@@ -16,7 +16,7 @@ describe("Customer Service", () => {
   test("makes a GET request to fetch customers", async () => {
     const customersMock: Customer[] = getCustomerMock();
 
-    (axios as any ).get.mockResolvedValue({
+    (axios as any).get.mockResolvedValue({
       data: customersMock,
     });
 
