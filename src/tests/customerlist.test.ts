@@ -31,4 +31,23 @@ describe("Customer List", () => {
 
         expect(wrapper).toBeTruthy();
     });
+    test("Renders a table element", async() => {
+        const customersMock: Customer[] = getCustomerMock();
+
+        (axios as any).get.mockResolvedValue({
+            data: customersMock,
+        });
+
+        const wrapper = mount(List, {
+            global: {
+                stubs: {
+                    RouterLink: RouterLinkStub,
+                },
+            },
+        });
+
+        const table = wrapper.find('table').element;
+
+        expect(table).toBeTruthy();
+    });
 });
