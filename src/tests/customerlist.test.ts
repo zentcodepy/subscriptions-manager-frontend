@@ -8,11 +8,11 @@ vi.mock("axios");
 
 function getCustomerMock() {
     return {
-        'data': 
-        [
-            { id: 1, business_name: "Company 1", document_number: "111000-1" },
-            { id: 2, business_name: "Company 2", document_number: "222000-1" },
-        ]
+        'data':
+            [
+                { id: 1, business_name: "Company 1", document_number: "111000-1" },
+                { id: 2, business_name: "Company 2", document_number: "222000-1" },
+            ]
     };
 };
 
@@ -24,7 +24,7 @@ const customersMock: { 'data': Customer[] } = getCustomerMock();
 });
 
 describe("Customer List", () => {
-    test("Renders data inside table", async() => {
+    test("Renders data inside table", async () => {
         const wrapper = mount(List, {
             global: {
                 stubs: {
@@ -39,10 +39,10 @@ describe("Customer List", () => {
         const headerColumns = thead.findAll('th');
         const tbody = table.find('tbody');
         const rows = tbody.findAll('tr');
-        
+
         const firstRow = rows[0];
         const ColumnsOfFirstRow = firstRow.findAll('td');
-        
+
         expect(axios.get).toHaveBeenCalledTimes(1);
         expect(rows).toHaveLength(2);
         expect(headerColumns[0].text()).toBe('Business Name');
