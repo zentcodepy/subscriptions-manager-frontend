@@ -20,14 +20,16 @@ function getCustomerMock() {
     };
 };
 
+const customersMock: CustomerIndexResponse = getCustomerMock();
+
+(axios as any).get.mockResolvedValue({
+    status: 200,
+    data: customersMock,
+});
+
 describe("Customer List", () => {
+
     test("Mounts properly", async () => {
-        const customersMock: CustomerIndexResponse = getCustomerMock();
-
-        (axios as any).get.mockResolvedValue({
-            data: customersMock,
-        });
-
         const wrapper = mount(List, {
             global: {
                 stubs: {
@@ -35,16 +37,10 @@ describe("Customer List", () => {
                 },
             },
         });
-
         expect(wrapper).toBeTruthy();
     });
+
     test("Renders a table element", async() => {
-        const customersMock: CustomerIndexResponse = getCustomerMock();
-
-        (axios as any).get.mockResolvedValue({
-            data: customersMock,
-        });
-
         const wrapper = mount(List, {
             global: {
                 stubs: {
@@ -52,19 +48,12 @@ describe("Customer List", () => {
                 },
             },
         });
-
         const table = wrapper.find('table').element;
 
         expect(table).toBeTruthy();
     });
+
     test("Renders data inside table", async() => {
-        const customersMock: CustomerIndexResponse = getCustomerMock();
-
-        (axios as any).get.mockResolvedValue({
-            status: 200,
-            data: customersMock,
-        });
-
         const wrapper = mount(List, {
             global: {
                 stubs: {
@@ -72,7 +61,6 @@ describe("Customer List", () => {
                 },
             },
         });
-
         await flushPromises();
 
         const table = wrapper.find('table');
