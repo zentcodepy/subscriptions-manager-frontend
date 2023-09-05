@@ -25,8 +25,10 @@ function fetchCustomers(inputValue?: string, pageNumber?: number) {
         .then((response) => {
             if (response.status == 200) {
                 const { data, meta } = response.data;
+                if (meta != undefined) {
+                    setPaginationData(meta);
+                }
                 customers.value = data;
-                setPaginationData(meta);
             }
         })
         .finally(() => {
@@ -42,7 +44,7 @@ function setPaginationData(meta: any) {
 }
 
 function noCustomers() {
-    return customers.value.length === 0;
+    return customers.value == undefined || customers.value.length == 0;
 }
 
 function nextPage() {
