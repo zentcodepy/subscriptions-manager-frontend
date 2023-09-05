@@ -1,5 +1,5 @@
 import { describe, expect, it, test, vi } from "vitest";
-import { mount, RouterLinkStub } from "@vue/test-utils";
+import { flushPromises, mount, RouterLinkStub } from "@vue/test-utils";
 import { Customer } from "../types/Customer.js";
 import axios from "axios";
 import List from "../pages/Customers/List.vue";
@@ -52,5 +52,37 @@ describe("Customer List", () => {
         const table = wrapper.find('table').element;
 
         expect(table).toBeTruthy();
+    });
+    test("Renders data inside table", async() => {
+        const customersMock: Customer[] = getCustomerMock();
+
+        (axios as any).get.mockResolvedValue({
+            status: 200,
+            data: customersMock,
+        });
+
+        const wrapper = mount(List, {
+            global: {
+                stubs: {
+                    RouterLink: RouterLinkStub,
+                },
+            },
+        });
+
+        await flushPromises();
+
+        const table = wrapper.find('table');
+        const thead = table.find('thead');
+        const headerColumns = thead.findAll('th');
+        const tbody = table.find('tbody');
+        const rows = tbody.findAll('tr');
+        
+        const firstRow = rows[0];
+        const ColumnsOfFirstRow = firstRow.findAll('td');
+        
+        expect(rows).toHaveLength(2);
+        expect(headerColumns[0].text()).toBe('Business Name');
+        expect(ColumnsOfFirstRow[0].text()).toBe('Company 1');
+        expect(ColumnsOfFirstRow[1].text()).toBe('111000-1');
     });
 });
