@@ -7,10 +7,13 @@ import List from "../pages/Customers/List.vue";
 vi.mock("axios");
 
 function getCustomerMock() {
-    return [
-        { id: 1, business_name: "Company 1", document_number: "111000-1" },
-        { id: 2, business_name: "Company 2", document_number: "222000-1" },
-    ];
+    return {
+        'data': 
+        [
+            { id: 1, business_name: "Company 1", document_number: "111000-1" },
+            { id: 2, business_name: "Company 2", document_number: "222000-1" },
+        ]
+    };
 };
 
 describe("Customer List", () => {
