@@ -6,10 +6,6 @@ import List from "../pages/Customers/List.vue";
 
 vi.mock("axios");
 
-interface CustomerIndexResponse {
-    'data': Customer[];
-}
-
 function getCustomerMock() {
     return {
         'data': 
@@ -20,7 +16,7 @@ function getCustomerMock() {
     };
 };
 
-const customersMock: CustomerIndexResponse = getCustomerMock();
+const customersMock: { 'data': Customer[] } = getCustomerMock();
 
 (axios as any).get.mockResolvedValue({
     status: 200,
