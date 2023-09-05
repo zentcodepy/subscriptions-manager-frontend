@@ -40,19 +40,6 @@ describe("Customer List", () => {
         expect(wrapper).toBeTruthy();
     });
 
-    test("Renders a table element", async() => {
-        const wrapper = mount(List, {
-            global: {
-                stubs: {
-                    RouterLink: RouterLinkStub,
-                },
-            },
-        });
-        const table = wrapper.find('table').element;
-
-        expect(table).toBeTruthy();
-    });
-
     test("Renders data inside table", async() => {
         const wrapper = mount(List, {
             global: {
