@@ -28,18 +28,6 @@ const customersMock: CustomerIndexResponse = getCustomerMock();
 });
 
 describe("Customer List", () => {
-
-    test("Mounts properly", async () => {
-        const wrapper = mount(List, {
-            global: {
-                stubs: {
-                    RouterLink: RouterLinkStub,
-                },
-            },
-        });
-        expect(wrapper).toBeTruthy();
-    });
-
     test("Renders data inside table", async() => {
         const wrapper = mount(List, {
             global: {
@@ -59,6 +47,7 @@ describe("Customer List", () => {
         const firstRow = rows[0];
         const ColumnsOfFirstRow = firstRow.findAll('td');
         
+        expect(axios.get).toHaveBeenCalledTimes(1);
         expect(rows).toHaveLength(2);
         expect(headerColumns[0].text()).toBe('Business Name');
         expect(ColumnsOfFirstRow[0].text()).toBe('Company 1');
