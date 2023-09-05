@@ -6,6 +6,10 @@ import List from "../pages/Customers/List.vue";
 
 vi.mock("axios");
 
+interface CustomerIndexResponse {
+    'data': Customer[];
+}
+
 function getCustomerMock() {
     return {
         'data': 
@@ -18,7 +22,7 @@ function getCustomerMock() {
 
 describe("Customer List", () => {
     test("Mounts properly", async () => {
-        const customersMock: Customer[] = getCustomerMock();
+        const customersMock: CustomerIndexResponse = getCustomerMock();
 
         (axios as any).get.mockResolvedValue({
             data: customersMock,
@@ -35,7 +39,7 @@ describe("Customer List", () => {
         expect(wrapper).toBeTruthy();
     });
     test("Renders a table element", async() => {
-        const customersMock: Customer[] = getCustomerMock();
+        const customersMock: CustomerIndexResponse = getCustomerMock();
 
         (axios as any).get.mockResolvedValue({
             data: customersMock,
@@ -54,7 +58,7 @@ describe("Customer List", () => {
         expect(table).toBeTruthy();
     });
     test("Renders data inside table", async() => {
-        const customersMock: Customer[] = getCustomerMock();
+        const customersMock: CustomerIndexResponse = getCustomerMock();
 
         (axios as any).get.mockResolvedValue({
             status: 200,
