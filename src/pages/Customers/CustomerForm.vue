@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ref } from 'vue';
 import AppLayout from '../../components/AppLayout.vue';
 import router from '../../router';
+import { createCustomer } from '../../services/CustomerService.ts';
 
 const form = ref({
     business_name: null,
@@ -16,14 +17,18 @@ const form = ref({
 
 // TODO:Check if user is logged in
 function submit() {
-    const url = '/base-url/api/customers';
-    axios.post(url, form.value)
-        .then(function (response) {
+    createCustomer(form.value)
+        .then((response) => {
+            if (response.status == 201) {
+                router.push('/customers');                
+            }
             console.log(response);
-            router.push('/customers');
         })
         .catch(function (error) {
             console.log(error);
+            if (error.response.data != undefined) {
+                alert(error.response.data.message)
+            }
         });
 }
 
