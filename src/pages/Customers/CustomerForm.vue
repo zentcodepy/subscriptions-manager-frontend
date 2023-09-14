@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import axios from 'axios';
-import { ref } from 'vue';
 import AppLayout from '../../components/AppLayout.vue';
+import { ref } from 'vue';
 import router from '../../router';
 import { createCustomer } from '../../services/CustomerService.ts';
 
