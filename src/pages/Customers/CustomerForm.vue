@@ -20,9 +20,11 @@ function submit() {
     createCustomer(form.value)
         .then((response) => {
             if (response.status == 201) {
-                router.push('/customers');                
+                router.push('/customers');
+            } else {
+                console.log(response);
+                alert('Error');
             }
-            console.log(response);
         })
         .catch(function (error) {
             console.log(error);
