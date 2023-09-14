@@ -11,7 +11,7 @@ const form = ref({
     phone_number: null,
     email: null,
     address: null,
-    comments: '--'
+    comments: null
 });
 
 // TODO:Check if user is logged in
@@ -91,6 +91,17 @@ function submit() {
                             <div class="mt-2">
                                 <input id="address" name="address" type="text"
                                     v-model="form.address"
+                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <div class="sm:col-span-4">
+                            <label for="comments" class="block text-sm font-medium leading-6 text-gray-900">Comments</label>
+                            <div class="mt-2">
+                                <input id="comments" name="comments" type="text"
+                                    v-model="form.comments"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
