@@ -1,11 +1,32 @@
 <script setup lang="ts">
+import axios from 'axios';
+import { ref } from 'vue';
 import AppLayout from '../../components/AppLayout.vue';
+import router from '../../router';
+
+const form = ref({
+    business_name: null,
+    document_number: null,
+    contact_name: null,
+    phone_number: null,
+    email: null,
+    address: null,
+    comments: '--'
+});
 
 // TODO:Check if user is logged in
-function submit()
-{
-    alert("submit")
+function submit() {
+    const url = '/base-url/api/customers';
+    axios.post(url, form.value)
+        .then(function (response) {
+            console.log(response);
+            router.push('/customers');
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
+
 </script>
 <template>
     <AppLayout>
@@ -20,6 +41,7 @@ function submit()
                             <label for="business_name" class="block text-sm font-medium leading-6 text-gray-900">Business Name</label>
                             <div class="mt-2">
                                 <input type="text" name="business_name" id="business_name"
+                                    v-model="form.business_name"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
@@ -28,6 +50,7 @@ function submit()
                             <label for="document_number" class="block text-sm font-medium leading-6 text-gray-900">Document Number / RUC</label>
                             <div class="mt-2">
                                 <input type="text" name="document_number" id="document_number"
+                                    v-model="form.document_number"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
@@ -38,6 +61,7 @@ function submit()
                             <label for="contact_name" class="block text-sm font-medium leading-6 text-gray-900">Contact Name</label>
                             <div class="mt-2">
                                 <input id="contact_name" name="contact_name" type="text"
+                                    v-model="form.contact_name"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
@@ -46,6 +70,7 @@ function submit()
                             <label for="phone_number" class="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
                             <div class="mt-2">
                                 <input id="phone_number" name="phone_number" type="tel"
+                                    v-model="form.phone_number"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
@@ -56,6 +81,7 @@ function submit()
                             <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
                             <div class="mt-2">
                                 <input id="email" name="email" type="email"
+                                    v-model="form.email"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
@@ -64,6 +90,7 @@ function submit()
                             <label for="address" class="block text-sm font-medium leading-6 text-gray-900">Address</label>
                             <div class="mt-2">
                                 <input id="address" name="address" type="text"
+                                    v-model="form.address"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
