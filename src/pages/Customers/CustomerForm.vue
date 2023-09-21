@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import AppLayout from '../../components/AppLayout.vue';
 import { ref } from 'vue';
+import { CreateCustomer } from '../../types/CreateCustomer';
 import router from '../../router';
 import { createCustomer } from '../../services/CustomerService.ts';
 
-const form = ref({
-    business_name: null,
-    document_number: null,
+const form = ref<CreateCustomer>({
+    business_name: '',
+    document_number: '',
     contact_name: null,
     phone_number: null,
     email: null,
