@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import AppLayout from '../../components/AppLayout.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { CreateCustomer } from '../../types/CreateCustomer';
 import router from '../../router';
-import { createCustomer } from '../../services/CustomerService.ts';
+import { createCustomer, getCustomer, updateCustomer } from '../../services/CustomerService.ts';
+
+// TODO:Check if user is logged in
+const editForm = ref(false);
+const customerId = ref('');
 
 const form = ref<CreateCustomer>({
     business_name: '',
@@ -15,9 +19,47 @@ const form = ref<CreateCustomer>({
     comments: null
 });
 
-// TODO:Check if user is logged in
+if (router.currentRoute.value.params != undefined && router.currentRoute.value.params.customerId != undefined) {
+    editForm.value = true;
+    customerId.value = router.currentRoute.value.params.customerId;
+    getCustomerData(customerId.value);
+}
+
+const formTitle = computed(() => editForm.value == true ? 'Edit Customer' : 'Create Customer');
+
+function getCustomerData(customerId: string) {
+    getCustomer(customerId)
+        .then((response) => {
+            if (response.status == 200) {
+                form.value = response.data.data;
+            } else {
+                console.log(response);
+                alert('Error');
+            }
+        })
+}
+
 function submit() {
-    createCustomer(form.value)
+    if (editForm.value) {
+        updateCustomer(customerId.value, form.value)
+        .then((response) => {
+            if (response.status == 200) {
+                router.push('/customers');
+            } else {
+                console.log(response);
+                alert('Error');
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+            if (error.response != undefined && error.response.data != undefined) {
+                alert(error.response.data.message)
+            } else {
+                alert("Error");
+            }
+        });
+    } else {
+        createCustomer(form.value)
         .then((response) => {
             if (response.status == 201) {
                 router.push('/customers');
@@ -34,8 +76,8 @@ function submit() {
                 alert("Error");
             }
         });
+    }
 }
-
 </script>
 <template>
     <AppLayout>
@@ -43,7 +85,7 @@ function submit() {
             <div class="space-y-12">
 
                 <div class="border-b border-gray-900/10 pb-12">
-                    <h2 class="text-base font-semibold leading-7 text-gray-900">Create Customer</h2>
+                    <h2 class="text-base font-semibold leading-7 text-gray-900">{{ formTitle }}</h2>
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="sm:col-span-2">

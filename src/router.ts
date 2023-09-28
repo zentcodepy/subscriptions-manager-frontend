@@ -23,5 +23,10 @@ export default createRouter({
       path: '/customers/create',
       component: CustomerForm,
     },
+    {
+      path: '/customers/:customerId/edit',
+      name: 'editCustomer',
+      component: CustomerForm,
+    },
   ],
 })
