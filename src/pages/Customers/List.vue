@@ -64,6 +64,13 @@ function previousPage() {
 <template>
     <AppLayout>
         <div class="m-5">
+            <div class="text-right mr-5">
+                <router-link 
+                    to="customers/create" 
+                    class="bg-indigo-600 text-white hover:bg-indigo-700 rounded-md px-3 py-2 text-sm font-medium">
+                    Create Customer
+                </router-link>
+            </div>
             <CustomerFilters
                 class="m-5"
                 @input-emitted="fetchCustomers"
