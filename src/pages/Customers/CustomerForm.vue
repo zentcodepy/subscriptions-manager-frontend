@@ -4,6 +4,7 @@ import { computed, ref } from 'vue';
 import { CreateCustomer } from '../../types/CreateCustomer';
 import router from '../../router';
 import { createCustomer, getCustomer, updateCustomer } from '../../services/CustomerService.ts';
+import TextInput from '../../components/common/TextInput.vue';
 
 // TODO:Check if user is logged in
 const editForm = ref(false);
@@ -91,18 +92,20 @@ function submit() {
                         <div class="sm:col-span-2">
                             <label for="business_name" class="block text-sm font-medium leading-6 text-gray-900">Business Name</label>
                             <div class="mt-2">
-                                <input type="text" name="business_name" id="business_name"
+                                <TextInput
+                                    id="business_name"
                                     v-model="form.business_name"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                />
                             </div>
                         </div>
 
                         <div class="sm:col-span-2">
                             <label for="document_number" class="block text-sm font-medium leading-6 text-gray-900">Document Number / RUC</label>
                             <div class="mt-2">
-                                <input type="text" name="document_number" id="document_number"
+                                <TextInput
+                                    id="document_number"
                                     v-model="form.document_number"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                />
                             </div>
                         </div>
                     </div>
@@ -111,18 +114,21 @@ function submit() {
                         <div class="sm:col-span-2">
                             <label for="contact_name" class="block text-sm font-medium leading-6 text-gray-900">Contact Name</label>
                             <div class="mt-2">
-                                <input id="contact_name" name="contact_name" type="text"
+                                <TextInput
+                                    id="contact_name"
                                     v-model="form.contact_name"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                />
                             </div>
                         </div>
 
                         <div class="sm:col-span-2">
                             <label for="phone_number" class="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
                             <div class="mt-2">
-                                <input id="phone_number" name="phone_number" type="tel"
+                                <TextInput
+                                    id="phone_number"
                                     v-model="form.phone_number"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    type="tel"
+                                />
                             </div>
                         </div>
                     </div>
@@ -131,18 +137,21 @@ function submit() {
                         <div class="sm:col-span-2">
                             <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
                             <div class="mt-2">
-                                <input id="email" name="email" type="email"
+                                <TextInput
+                                    id="email"
                                     v-model="form.email"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    type="email"
+                                />
                             </div>
                         </div>
 
                         <div class="sm:col-span-2">
                             <label for="address" class="block text-sm font-medium leading-6 text-gray-900">Address</label>
                             <div class="mt-2">
-                                <input id="address" name="address" type="text"
+                                <TextInput
+                                    id="address"
                                     v-model="form.address"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                />
                             </div>
                         </div>
                     </div>
@@ -151,9 +160,10 @@ function submit() {
                         <div class="sm:col-span-4">
                             <label for="comments" class="block text-sm font-medium leading-6 text-gray-900">Comments</label>
                             <div class="mt-2">
-                                <input id="comments" name="comments" type="text"
+                                <TextInput
+                                    id="comments"
                                     v-model="form.comments"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                />
                             </div>
                         </div>
                     </div>
