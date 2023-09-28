@@ -4,7 +4,7 @@ import { computed, ref } from 'vue';
 import { CreateCustomer } from '../../types/CreateCustomer';
 import router from '../../router';
 import { createCustomer, getCustomer, updateCustomer } from '../../services/CustomerService.ts';
-import TextInput from '../../components/common/TextInput.vue';
+import TextInputWithLabel from '../../components/common/TextInputWithLabel.vue';
 import PrimaryButton from '../../components/common/PrimaryButton.vue';
 
 // TODO:Check if user is logged in
@@ -91,81 +91,67 @@ function submit() {
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="sm:col-span-2">
-                            <label for="business_name" class="block text-sm font-medium leading-6 text-gray-900">Business Name</label>
-                            <div class="mt-2">
-                                <TextInput
-                                    id="business_name"
-                                    v-model="form.business_name"
-                                />
-                            </div>
+                            <TextInputWithLabel
+                                inputId="business_name"
+                                v-model="form.business_name"
+                                label="Business Name"
+                            />
                         </div>
 
                         <div class="sm:col-span-2">
-                            <label for="document_number" class="block text-sm font-medium leading-6 text-gray-900">Document Number / RUC</label>
-                            <div class="mt-2">
-                                <TextInput
-                                    id="document_number"
-                                    v-model="form.document_number"
-                                />
-                            </div>
+                            <TextInputWithLabel
+                                inputId="document_number"
+                                v-model="form.document_number"
+                                label="Document Number / RUC"
+                            />
                         </div>
                     </div>
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="sm:col-span-2">
-                            <label for="contact_name" class="block text-sm font-medium leading-6 text-gray-900">Contact Name</label>
-                            <div class="mt-2">
-                                <TextInput
-                                    id="contact_name"
-                                    v-model="form.contact_name"
-                                />
-                            </div>
+                            <TextInputWithLabel
+                                inputId="contact_name"
+                                v-model="form.contact_name"
+                                label="Contact Name"
+                            />
                         </div>
 
                         <div class="sm:col-span-2">
-                            <label for="phone_number" class="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
-                            <div class="mt-2">
-                                <TextInput
-                                    id="phone_number"
-                                    v-model="form.phone_number"
-                                    type="tel"
-                                />
-                            </div>
+                            <TextInputWithLabel
+                                inputId="phone_number"
+                                v-model="form.phone_number"
+                                label="Phone Number"
+                                inputType="tel"
+                            />
                         </div>
                     </div>
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="sm:col-span-2">
-                            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
-                            <div class="mt-2">
-                                <TextInput
-                                    id="email"
-                                    v-model="form.email"
-                                    type="email"
-                                />
-                            </div>
+                            <TextInputWithLabel
+                                inputId="email"
+                                v-model="form.email"
+                                label="Email"
+                                inputType="email"
+                            />
                         </div>
 
                         <div class="sm:col-span-2">
-                            <label for="address" class="block text-sm font-medium leading-6 text-gray-900">Address</label>
-                            <div class="mt-2">
-                                <TextInput
-                                    id="address"
-                                    v-model="form.address"
-                                />
-                            </div>
+                            <TextInputWithLabel
+                                inputId="address"
+                                v-model="form.address"
+                                label="Address"
+                            />
                         </div>
                     </div>
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="sm:col-span-4">
-                            <label for="comments" class="block text-sm font-medium leading-6 text-gray-900">Comments</label>
-                            <div class="mt-2">
-                                <TextInput
-                                    id="comments"
-                                    v-model="form.comments"
-                                />
-                            </div>
+                            <TextInputWithLabel
+                                inputId="comments"
+                                v-model="form.comments"
+                                label="Comments"
+                            />
                         </div>
                     </div>
                 </div>
