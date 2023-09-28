@@ -5,6 +5,7 @@ import { CreateCustomer } from '../../types/CreateCustomer';
 import router from '../../router';
 import { createCustomer, getCustomer, updateCustomer } from '../../services/CustomerService.ts';
 import TextInput from '../../components/common/TextInput.vue';
+import PrimaryButton from '../../components/common/PrimaryButton.vue';
 
 // TODO:Check if user is logged in
 const editForm = ref(false);
@@ -171,10 +172,7 @@ function submit() {
             </div>
 
             <div class="mt-6 flex items-center justify-start gap-x-6">
-                <button
-                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    Save
-                </button>
+                <PrimaryButton title="Save"></PrimaryButton>
             </div>
         </form>
     </AppLayout>
