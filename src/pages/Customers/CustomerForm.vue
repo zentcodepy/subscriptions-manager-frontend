@@ -24,7 +24,7 @@ const form = ref<CreateCustomer>({
 
 const route = useRoute();
 
-if (route != undefined && route.params != undefined && route.params.customerId != undefined) {
+if (route?.params?.customerId) {
     editForm.value = true;
     customerId.value = route.params.customerId;
     getCustomerData(customerId.value);
