@@ -3,6 +3,7 @@ import AppLayout from '../../components/AppLayout.vue';
 import { computed, ref } from 'vue';
 import { CreateCustomer } from '../../types/CreateCustomer';
 import router from '../../router';
+import { useRoute } from 'vue-router';
 import { createCustomer, getCustomer, updateCustomer } from '../../services/CustomerService.ts';
 import TextInputWithLabel from '../../components/common/TextInputWithLabel.vue';
 import PrimaryButton from '../../components/common/PrimaryButton.vue';
@@ -21,9 +22,11 @@ const form = ref<CreateCustomer>({
     comments: null
 });
 
-if (router.currentRoute.value.params != undefined && router.currentRoute.value.params.customerId != undefined) {
+const route = useRoute();
+
+if (route.params != undefined && route.params.customerId != undefined) {
     editForm.value = true;
-    customerId.value = router.currentRoute.value.params.customerId;
+    customerId.value = route.params.customerId;
     getCustomerData(customerId.value);
 }
 
