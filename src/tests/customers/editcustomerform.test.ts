@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from "vitest";
 import { shallowMount } from "@vue/test-utils";
-import CustomerForm from "../pages/Customers/CustomerForm.vue";
+import CustomerForm from "../../pages/Customers/CustomerForm.vue";
 
 // vi.mock('vue-router', () => ({
 //     useRoute: () => ({

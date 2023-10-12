@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { Customer } from "../types/Customer.js";
-import { getCustomers } from "../services/CustomerService.js";
+import { Customer } from "../../types/Customer.js";
+import { getCustomers } from "../../services/CustomerService.js";
 import axios from "axios";
 
 vi.mock("axios");
