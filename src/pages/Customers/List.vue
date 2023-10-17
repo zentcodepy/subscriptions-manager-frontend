@@ -6,6 +6,7 @@ import { Pagination } from '../../types/Pagination';
 import CustomerFilters from './Partials/CustomerFilters.vue';
 import ListPagination from '../../components/common/ListPagination.vue';
 import { getCustomers } from '../../services/CustomerService.ts';
+import ButtonLink from '../../components/common/ButtonLink.vue';
 
 const paginationData = ref<Pagination>({
     from: 0,
@@ -64,6 +65,13 @@ function previousPage() {
 <template>
     <AppLayout>
         <div class="m-5">
+            <div class="text-right mr-5">
+                <router-link 
+                    to="customers/create" 
+                    class="bg-indigo-600 text-white hover:bg-indigo-700 rounded-md px-3 py-2 text-sm font-medium">
+                    Create Customer
+                </router-link>
+            </div>
             <CustomerFilters
                 class="m-5"
                 @input-emitted="fetchCustomers"
@@ -83,6 +91,9 @@ function previousPage() {
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Document Number
                         </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Actions
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -96,6 +107,11 @@ function previousPage() {
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-900">{{ customer.document_number }}</div>
+                            </td>
+                            <td>
+                                <ButtonLink
+                                    :url-route="'/customers/' + customer.id + '/edit'"
+                                    title="Edit"/>
                             </td>
                         </tr>
                     </template>

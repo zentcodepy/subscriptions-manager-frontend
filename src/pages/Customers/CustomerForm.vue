@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import AppLayout from '../../components/AppLayout.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { CreateCustomer } from '../../types/CreateCustomer';
 import router from '../../router';
-import { createCustomer } from '../../services/CustomerService.ts';
+import { useRoute } from 'vue-router';
+import { createCustomer, getCustomer, updateCustomer } from '../../services/CustomerService.ts';
+import TextInputWithLabel from '../../components/common/TextInputWithLabel.vue';
+import PrimaryButton from '../../components/common/PrimaryButton.vue';
+
+// TODO:Check if user is logged in
+const editForm = ref(false);
+const customerId = ref('');
 
 const form = ref<CreateCustomer>({
     business_name: '',
@@ -15,9 +22,49 @@ const form = ref<CreateCustomer>({
     comments: null
 });
 
-// TODO:Check if user is logged in
+const route = useRoute();
+
+if (route?.params?.customerId) {
+    editForm.value = true;
+    customerId.value = route.params.customerId;
+    getCustomerData(customerId.value);
+}
+
+const formTitle = computed(() => editForm.value == true ? 'Edit Customer' : 'Create Customer');
+
+function getCustomerData(customerId: string) {
+    getCustomer(customerId)
+        .then((response) => {
+            if (response.status == 200) {
+                form.value = response.data.data;
+            } else {
+                console.log(response);
+                alert('Error');
+            }
+        })
+}
+
 function submit() {
-    createCustomer(form.value)
+    if (editForm.value) {
+        updateCustomer(customerId.value, form.value)
+        .then((response) => {
+            if (response.status == 200) {
+                router.push('/customers');
+            } else {
+                console.log(response);
+                alert('Error');
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+            if (error.response != undefined && error.response.data != undefined) {
+                alert(error.response.data.message)
+            } else {
+                alert("Error");
+            }
+        });
+    } else {
+        createCustomer(form.value)
         .then((response) => {
             if (response.status == 201) {
                 router.push('/customers');
@@ -34,8 +81,8 @@ function submit() {
                 alert("Error");
             }
         });
+    }
 }
-
 </script>
 <template>
     <AppLayout>
@@ -43,86 +90,78 @@ function submit() {
             <div class="space-y-12">
 
                 <div class="border-b border-gray-900/10 pb-12">
-                    <h2 class="text-base font-semibold leading-7 text-gray-900">Create Customer</h2>
+                    <h2 class="text-base font-semibold leading-7 text-gray-900">{{ formTitle }}</h2>
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="sm:col-span-2">
-                            <label for="business_name" class="block text-sm font-medium leading-6 text-gray-900">Business Name</label>
-                            <div class="mt-2">
-                                <input type="text" name="business_name" id="business_name"
-                                    v-model="form.business_name"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            </div>
+                            <TextInputWithLabel
+                                inputId="business_name"
+                                v-model="form.business_name"
+                                label="Business Name"
+                            />
                         </div>
 
                         <div class="sm:col-span-2">
-                            <label for="document_number" class="block text-sm font-medium leading-6 text-gray-900">Document Number / RUC</label>
-                            <div class="mt-2">
-                                <input type="text" name="document_number" id="document_number"
-                                    v-model="form.document_number"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            </div>
+                            <TextInputWithLabel
+                                inputId="document_number"
+                                v-model="form.document_number"
+                                label="Document Number / RUC"
+                            />
                         </div>
                     </div>
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="sm:col-span-2">
-                            <label for="contact_name" class="block text-sm font-medium leading-6 text-gray-900">Contact Name</label>
-                            <div class="mt-2">
-                                <input id="contact_name" name="contact_name" type="text"
-                                    v-model="form.contact_name"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            </div>
+                            <TextInputWithLabel
+                                inputId="contact_name"
+                                v-model="form.contact_name"
+                                label="Contact Name"
+                            />
                         </div>
 
                         <div class="sm:col-span-2">
-                            <label for="phone_number" class="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
-                            <div class="mt-2">
-                                <input id="phone_number" name="phone_number" type="tel"
-                                    v-model="form.phone_number"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            </div>
+                            <TextInputWithLabel
+                                inputId="phone_number"
+                                v-model="form.phone_number"
+                                label="Phone Number"
+                                inputType="tel"
+                            />
                         </div>
                     </div>
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="sm:col-span-2">
-                            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
-                            <div class="mt-2">
-                                <input id="email" name="email" type="email"
-                                    v-model="form.email"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            </div>
+                            <TextInputWithLabel
+                                inputId="email"
+                                v-model="form.email"
+                                label="Email"
+                                inputType="email"
+                            />
                         </div>
 
                         <div class="sm:col-span-2">
-                            <label for="address" class="block text-sm font-medium leading-6 text-gray-900">Address</label>
-                            <div class="mt-2">
-                                <input id="address" name="address" type="text"
-                                    v-model="form.address"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            </div>
+                            <TextInputWithLabel
+                                inputId="address"
+                                v-model="form.address"
+                                label="Address"
+                            />
                         </div>
                     </div>
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div class="sm:col-span-4">
-                            <label for="comments" class="block text-sm font-medium leading-6 text-gray-900">Comments</label>
-                            <div class="mt-2">
-                                <input id="comments" name="comments" type="text"
-                                    v-model="form.comments"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            </div>
+                            <TextInputWithLabel
+                                inputId="comments"
+                                v-model="form.comments"
+                                label="Comments"
+                            />
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="mt-6 flex items-center justify-start gap-x-6">
-                <button
-                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    Save
-                </button>
+                <PrimaryButton title="Save"></PrimaryButton>
             </div>
         </form>
     </AppLayout>

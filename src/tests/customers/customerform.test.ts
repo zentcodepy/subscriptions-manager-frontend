@@ -1,6 +1,6 @@
 import { describe, expect, it, test, vi } from "vitest";
 import { flushPromises, mount, RouterLinkStub } from "@vue/test-utils";
-import CustomerForm from "../pages/Customers/CustomerForm.vue";
+import CustomerForm from "../../pages/Customers/CustomerForm.vue";
 import axios from "axios";
 
 vi.mock("axios");
