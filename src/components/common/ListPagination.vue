@@ -23,6 +23,20 @@ function isCurrentPage(pageNumber: Number) {
 function selectPage(pageNumber: Number) {
     emit('page-number-emitted', pageNumber);
 }
+
+function previousPage() {
+    const pageNumber = props.paginationData.currentPage - 1;
+    if (pageNumber > 0) {
+        emit('previous-page-emitted', pageNumber);
+    }
+}
+
+function nextPage() {
+    const pageNumber = props.paginationData.currentPage + 1;
+    if (pageNumber <= props.paginationData.pagesNumber) {
+        emit('next-page-emitted', pageNumber);
+    }
+}
 </script>
 <template>
     <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
@@ -47,7 +61,7 @@ function selectPage(pageNumber: Number) {
             <div>
                 <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
                     <a  
-                        @click="$emit('previous-page-emitted')"
+                        @click="previousPage()"
                         class="cursor-pointer relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
                         <span class="sr-only">Previous</span>
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -66,7 +80,7 @@ function selectPage(pageNumber: Number) {
                         {{ pageNumber }}
                     </a>
                 <a  
-                    @click="$emit('next-page-emitted')"
+                    @click="nextPage()"
                     class="cursor-pointer relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
                     <span class="sr-only">Next</span>
                     <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

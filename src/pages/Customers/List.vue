@@ -47,20 +47,6 @@ function setPaginationData(meta: any) {
 function noCustomers() {
     return customers.value == undefined || customers.value.length == 0;
 }
-
-function nextPage() {
-    const pageNumber = paginationData.value.currentPage + 1;
-    if (pageNumber <= paginationData.value.pagesNumber) {
-        fetchCustomers('', pageNumber);
-    }
-}
-
-function previousPage() {
-    const pageNumber = paginationData.value.currentPage - 1;
-    if (pageNumber > 0) {
-        fetchCustomers('', pageNumber);
-    }
-}
 </script>
 <template>
     <AppLayout>
@@ -79,8 +65,8 @@ function previousPage() {
             <ListPagination
                 :pagination-data="paginationData"
                 @page-number-emitted="fetchCustomers('', $event)"
-                @next-page-emitted="nextPage()"
-                @previous-page-emitted="previousPage()"
+                @next-page-emitted="fetchCustomers('', $event)"
+                @previous-page-emitted="fetchCustomers('', $event)"
             />
             <table class="table-auto min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
