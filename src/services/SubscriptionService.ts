@@ -11,3 +11,10 @@ export async function getSubscriptions(pageNumber?: number) {
 
     return response;
 }
+
+export async function createSubscription(form: Object) {
+    const url = '/base-url/api/subscriptions';
+    const response = await axios.post(url, form);
+
+    return response;
+}

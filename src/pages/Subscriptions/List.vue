@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppLayout from '../../components/AppLayout.vue';
 import { ref, onMounted } from 'vue';
-import { Subscription } from '../../types/Subscription';
+import { SubscriptionData } from '../../types/Subscriptions/SubscriptionData';
 import { Pagination } from '../../types/Pagination';
 import ListPagination from '../../components/common/ListPagination.vue';
 import { getSubscriptions } from '../../services/SubscriptionService';
@@ -13,7 +13,7 @@ const paginationData = ref<Pagination>({
     currentPage: 0,
     pagesNumber: 0,
 });
-const subscriptions = ref<Subscription[]>([]);
+const subscriptions = ref<SubscriptionData[]>([]);
 
 onMounted(() => {
     fetchSubscriptions()
@@ -49,13 +49,13 @@ function noRegisters() {
 <template>
     <AppLayout>
         <div class="m-5">
-            <!-- <div class="text-right mr-5">
+            <div class="text-right mr-5">
                 <router-link 
                     to="subscriptions/create" 
                     class="bg-indigo-600 text-white hover:bg-indigo-700 rounded-md px-3 py-2 text-sm font-medium">
                     Create Subscription
                 </router-link>
-            </div> -->
+            </div>
             <ListPagination
                 :pagination-data="paginationData"
                 @page-number-emitted="fetchSubscriptions($event)"

@@ -4,6 +4,7 @@ import CustomerForm from './pages/Customers/CustomerForm.vue';
 import Dashboard from './components/Dashboard.vue';
 import Login from './components/Login.vue';
 import Subscriptions from './pages/Subscriptions/List.vue';
+import SubscriptionCreateForm from './pages/Subscriptions/SubscriptionCreateForm.vue';
 
 export const routes = [
   {
@@ -31,6 +32,10 @@ export const routes = [
     path: '/subscriptions',
     component: Subscriptions,
   },
+  {
+    path: '/subscriptions/create',
+    component: SubscriptionCreateForm,
+  }
 ];
 
 const router = createRouter({

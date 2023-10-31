@@ -1,4 +1,4 @@
-export interface Subscription {
+export interface SubscriptionData {
     id: number,
     service_name: string,
     date_from: string,
