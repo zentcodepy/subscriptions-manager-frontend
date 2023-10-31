@@ -8,6 +8,7 @@ import InputLabel from '../../components/common/InputLabel.vue';
 import TextInputWithLabel from '../../components/common/TextInputWithLabel.vue';
 import PrimaryButton from '../../components/common/PrimaryButton.vue';
 import VueMultiselect from 'vue-multiselect';
+import InputRadio from '../../components/common/InputRadio.vue';
 
 // TODO:Check if user is logged in
 
@@ -110,32 +111,22 @@ function submit() {
                         <div class="sm:col-span-2">
                             <InputLabel text="Payment Service Type" />
                             <div class="mt-2">
-                                <input
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                                    type="radio"
-                                    id="manual"
-                                    name="payment_service_type"
+                                <InputRadio
+                                    input-id="manual"
+                                    input-name="payment_service_type"
+                                    label="Manual"
                                     value="manual"
-                                    v-model="form.payment_service_type">
-                                <label
-                                    class="ml-2 font-medium text-sm"
-                                    for="manual">
-                                    Manual
-                                </label>
+                                    v-model="form.payment_service_type"
+                                />
                             </div>
                             <div class="mt-2">
-                                <input
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                                    type="radio"
-                                    id="metrepay"
-                                    name="payment_service_type"
+                                <InputRadio
+                                    input-id="metrepay"
+                                    input-name="payment_service_type"
+                                    label="Metrepay"
                                     value="metrepay"
-                                    v-model="form.payment_service_type">
-                                <label
-                                    class="ml-2 font-medium text-sm"
-                                    for="metrepay">
-                                    Metrepay
-                                </label>
+                                    v-model="form.payment_service_type"
+                                />
                             </div>
                         </div>
                     </div>
