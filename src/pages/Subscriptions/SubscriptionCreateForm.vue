@@ -3,7 +3,7 @@ import AppLayout from '../../components/AppLayout.vue';
 import { ref } from 'vue';
 import { CreateSubscriptionData } from '../../types/Subscriptions/CreateSubscriptionData';
 import router from '../../router';
-import { createSubscription } from '../../services/SubscriptionService';
+import { createSubscription, getServicesOptions } from '../../services/SubscriptionService';
 import InputLabel from '../../components/common/InputLabel.vue';
 import TextInputWithLabel from '../../components/common/TextInputWithLabel.vue';
 import PrimaryButton from '../../components/common/PrimaryButton.vue';
@@ -20,17 +20,23 @@ const form = ref<CreateSubscriptionData>({
     payment_service_type: '',
 });
 
-const formTitle = 'Create Customer';
+const formTitle = 'Create Subscription';
 
-let services: Array<{}> = [];
+let servicesOptions = ref([]);
 
-getServicesOptions();
+getServicesOptionsForSelect();
 
-function getServicesOptions() {
-    services = [
-        { id: "1", name: "Service 1" },
-        { id: "2", name: "Service 2" },
-    ]
+function getServicesOptionsForSelect() {
+    getServicesOptions('')
+    .then((response) => {
+        if (response.status == 200) {
+            servicesOptions.value = response.data.data;
+        }
+    })
+    .catch(function (error) {
+        console.log(error)
+        alert("Error");
+    })
 }
 
 function submit() {
@@ -81,8 +87,12 @@ function submit() {
                             <label class="block text-sm font-medium leading-6 text-gray-900">
                                 Service
                             </label>
-                            <VueMultiselect v-model="form.service" label="name" placeholder="Select" track-by="id"
-                                :options="services">
+                            <VueMultiselect 
+                                v-model="form.service"
+                                label="name"
+                                placeholder="Select"
+                                track-by="id"
+                                :options="servicesOptions">
                             </VueMultiselect>
                         </div>
                     </div>
