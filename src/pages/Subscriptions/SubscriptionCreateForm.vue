@@ -15,8 +15,10 @@ import InputRadio from '../../components/common/InputRadio.vue';
 const form = ref<CreateSubscriptionData>({
     service: {},
     service_id: null,
+    automatic_notification_enabled: false,
     date_from: '',
-    date_to: '',
+    duration_in_months: 0,
+    grace_period_in_days: 0,
     total_amount: '',
     payment_service_type: '',
 });
@@ -42,24 +44,23 @@ function getServicesOptionsForSelect() {
 
 function submit() {
     form.value.service_id = form.value.service.id;
-    console.log(form.value);
-    // createSubscription(form.value);
-    // .then((response) => {
-    //     if (response.status == 201) {
-    //         router.push('/subscriptions');
-    //     } else {
-    //         console.log(response);
-    //         alert('Error');
-    //     }
-    // })
-    // .catch(function (error) {
-    //     console.log(error);
-    //     if (error.response != undefined && error.response.data != undefined) {
-    //         alert(error.response.data.message)
-    //     } else {
-    //         alert("Error");
-    //     }
-    // });
+    createSubscription(form.value)
+    .then((response) => {
+        if (response.status == 201) {
+            router.push('/subscriptions');
+        } else {
+            console.log(response);
+            alert('Error');
+        }
+    })
+    .catch(function (error) {
+        console.log(error);
+        if (error.response != undefined && error.response.data != undefined) {
+            alert(error.response.data.message)
+        } else {
+            alert("Error");
+        }
+    });
 }
 </script>
 <template>
@@ -76,9 +77,21 @@ function submit() {
                             <TextInputWithLabel inputId="date_from" v-model="form.date_from" label="Date from"
                                 inputType="date" />
                         </div>
-                        <!-- Date to -->
+                        <!-- Duration in months -->
                         <div class="sm:col-span-2">
-                            <TextInputWithLabel inputId="date_to" v-model="form.date_to" label="Date to" inputType="date" />
+                            <label
+                                class="block text-sm font-medium leading-6 text-gray-900"
+                                for="duration_in_months"
+                            >
+                                Duration in months
+                            </label>
+                            <input
+                                class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                                type="number"
+                                id="duration_in_months"
+                                v-model="form.duration_in_months"
+                                min=0
+                            >
                         </div>
                     </div>
 
@@ -95,6 +108,25 @@ function submit() {
                                 track-by="id"
                                 :options="servicesOptions">
                             </VueMultiselect>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <!-- Grace period in days -->
+                        <div class="sm:col-span-2">
+                            <label
+                                class="block text-sm font-medium leading-6 text-gray-900"
+                                for="grace_period_in_days"
+                            >
+                                Grace Period In Days
+                            </label>
+                            <input
+                                class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                                type="number"
+                                id="grace_period_in_days"
+                                v-model="form.grace_period_in_days"
+                                min=0
+                            >
                         </div>
                     </div>
 
@@ -128,6 +160,19 @@ function submit() {
                                     v-model="form.payment_service_type"
                                 />
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <!-- Automatic notification enabled -->
+                        <div class="sm:col-span-2">
+                            <input 
+                                type="checkbox"
+                                id="automatic_notification_enabled"
+                                name="automatic_notification_enabled"
+                                v-model="form.automatic_notification_enabled"
+                            >
+                            <label for="automatic_notification_enabled"> Automatic notification enabled</label>
                         </div>
                     </div>
                 </div>
