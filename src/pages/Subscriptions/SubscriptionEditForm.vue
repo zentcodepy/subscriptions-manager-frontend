@@ -6,6 +6,8 @@ import router from '../../router';
 import { useRoute } from 'vue-router';
 import VueMultiselect from 'vue-multiselect';
 import PrimaryButton from '../../components/common/PrimaryButton.vue';
+import InputLabel from '../../components/common/InputLabel.vue';
+import TextInputWithLabel from '../../components/common/TextInputWithLabel.vue';
 
 const form = ref<any>({
     id: null,
@@ -18,7 +20,7 @@ const form = ref<any>({
 const formTitle = 'Edit Subscription';
 const route = useRoute();
 const subscriptionId = ref('');
-let subscriptionData = ref();
+let subscriptionData = ref({});
 let statusOptions: any = ref([{ id: '', name: '' }]);
 let selectedStatus = ref();
 
@@ -86,11 +88,41 @@ function submit() {
             <div class="mx-auto max-w-2xl text-center pt-5">
                 <h2 class="text-2xl font-semibold leading-7 text-gray-900">{{ formTitle }}</h2>
             </div>
-            <!-- Status -->
+
+            <div class="grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-2 pt-5">
+                    <!-- Date from -->
+                    <div>
+                        <InputLabel text="Date From"/>
+                        <InputLabel :text="subscriptionData.date_from"/>
+                    </div>
+                    <!-- Date to -->
+                    <div>
+                        <InputLabel text="Date To"/>
+                        <InputLabel :text="subscriptionData.date_to"/>
+                    </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-1 pt-5">
+                <!-- Service -->
+                <div>
+                    <InputLabel text="Service"/>
+                    <InputLabel :text="subscriptionData.service_name"/>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-1 pt-5">
+                <!-- Customer -->
+                <div>
+                    <InputLabel text="Customer"/>
+                    <InputLabel :text="subscriptionData.customer_name"/>
+                </div>
+            </div>
+
             <div class="mt-10 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                <!-- Status -->
                 <div class="sm:col-span-2">
                     <label class="block text-sm font-medium leading-6 text-gray-900">
-                        Subscription
+                        Status
                     </label>
                     <VueMultiselect 
                         v-model="selectedStatus"
