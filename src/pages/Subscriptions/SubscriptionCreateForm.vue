@@ -13,7 +13,6 @@ import InputRadio from '../../components/common/InputRadio.vue';
 // TODO:Check if user is logged in
 
 const form = ref<CreateSubscriptionData>({
-    service: {},
     service_id: null,
     automatic_notification_enabled: false,
     date_from: '',
@@ -26,6 +25,7 @@ const form = ref<CreateSubscriptionData>({
 const formTitle = 'Create Subscription';
 
 let servicesOptions = ref([]);
+let selectedService = ref();
 
 getServicesOptionsForSelect();
 
@@ -42,8 +42,12 @@ function getServicesOptionsForSelect() {
     })
 }
 
+function formatData() {
+    form.value.service_id = selectedService.value.id;
+}
+
 function submit() {
-    form.value.service_id = form.value.service.id;
+    formatData();
     createSubscription(form.value)
     .then((response) => {
         if (response.status == 201) {
@@ -102,7 +106,7 @@ function submit() {
                             Service
                         </label>
                         <VueMultiselect 
-                            v-model="form.service"
+                            v-model="selectedService"
                             label="name"
                             placeholder="Select"
                             track-by="id"

@@ -1,5 +1,4 @@
 export interface CreateSubscriptionData {
-    service: any,
     service_id: string | null,
     automatic_notification_enabled: Boolean,
     date_from: string,
