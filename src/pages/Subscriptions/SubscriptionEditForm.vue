@@ -86,18 +86,20 @@ function submit() {
             <div class="mx-auto max-w-2xl text-center pt-5">
                 <h2 class="text-2xl font-semibold leading-7 text-gray-900">{{ formTitle }}</h2>
             </div>
-            <!-- Total amount -->
-            <div class="sm:col-span-2">
-                <label class="block text-sm font-medium leading-6 text-gray-900">
-                    Subscription
-                </label>
-                <VueMultiselect 
-                    v-model="selectedStatus"
-                    label="name"
-                    placeholder="Select"
-                    track-by="id"
-                    :options="statusOptions">
-                </VueMultiselect>
+            <!-- Status -->
+            <div class="mt-10 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                <div class="sm:col-span-2">
+                    <label class="block text-sm font-medium leading-6 text-gray-900">
+                        Subscription
+                    </label>
+                    <VueMultiselect 
+                        v-model="selectedStatus"
+                        label="name"
+                        placeholder="Select"
+                        track-by="id"
+                        :options="statusOptions">
+                    </VueMultiselect>
+                </div>
             </div>
 
             <div class="mt-6 flex items-center justify-start gap-x-6">
