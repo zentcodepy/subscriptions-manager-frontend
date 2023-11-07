@@ -5,6 +5,7 @@ import { SubscriptionData } from '../../types/Subscriptions/SubscriptionData';
 import { Pagination } from '../../types/Pagination';
 import ListPagination from '../../components/common/ListPagination.vue';
 import { getSubscriptions } from '../../services/SubscriptionService';
+import ButtonLink from '../../components/common/ButtonLink.vue';
 
 const paginationData = ref<Pagination>({
     from: 0,
@@ -83,6 +84,9 @@ function noRegisters() {
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Status
                         </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Actions
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -108,6 +112,11 @@ function noRegisters() {
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-900">{{ subscription.status }}</div>
+                            </td>
+                            <td>
+                                <ButtonLink
+                                    :url-route="'/subscriptions/' + subscription.id + '/edit'"
+                                    title="Edit"/>
                             </td>
                         </tr>
                     </template>

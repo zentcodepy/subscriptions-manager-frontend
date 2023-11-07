@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard.vue';
 import Login from './components/Login.vue';
 import Subscriptions from './pages/Subscriptions/List.vue';
 import SubscriptionCreateForm from './pages/Subscriptions/SubscriptionCreateForm.vue';
+import SubscriptionEditForm from './pages/Subscriptions/SubscriptionEditForm.vue';
 
 export const routes = [
   {
@@ -35,6 +36,10 @@ export const routes = [
   {
     path: '/subscriptions/create',
     component: SubscriptionCreateForm,
+  },
+  {
+    path: '/subscriptions/:subscriptionId/edit',
+    component: SubscriptionEditForm,
   }
 ];
 
