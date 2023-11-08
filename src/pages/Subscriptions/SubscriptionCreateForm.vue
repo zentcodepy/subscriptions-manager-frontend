@@ -9,6 +9,7 @@ import TextInputWithLabel from '../../components/common/TextInputWithLabel.vue';
 import PrimaryButton from '../../components/common/PrimaryButton.vue';
 import VueMultiselect from 'vue-multiselect';
 import InputRadio from '../../components/common/InputRadio.vue';
+import NumericInput from '../../components/common/NumericInput.vue';
 
 // TODO:Check if user is logged in
 
@@ -16,8 +17,8 @@ const form = ref<CreateSubscriptionData>({
     service_id: null,
     automatic_notification_enabled: false,
     date_from: '',
-    duration_in_months: 0,
-    grace_period_in_days: 0,
+    duration_in_months: "0",
+    grace_period_in_days: "0",
     total_amount: '',
     payment_service_type: '',
 });
@@ -83,19 +84,12 @@ function submit() {
                     </div>
                     <!-- Duration in months -->
                     <div>
-                        <label
-                            class="block text-sm font-medium leading-6 text-gray-900"
-                            for="duration_in_months"
-                        >
-                            Duration in months
-                        </label>
-                        <input
-                            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
-                            type="number"
-                            id="duration_in_months"
+                        <NumericInput
+                            input-id="duration_in_months"
                             v-model="form.duration_in_months"
-                            min=0
-                        >
+                            label="Duration in months"
+                            :min-value="0"
+                        />
                     </div>
                 </div>
 
@@ -118,27 +112,24 @@ function submit() {
                 <div class="mt-10 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                     <!-- Grace period in days -->
                     <div class="sm:col-span-2">
-                        <label
-                            class="block text-sm font-medium leading-6 text-gray-900"
-                            for="grace_period_in_days"
-                        >
-                            Grace Period In Days
-                        </label>
-                        <input
-                            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
-                            type="number"
-                            id="grace_period_in_days"
+                        <NumericInput
+                            input-id="grace_period_in_days"
                             v-model="form.grace_period_in_days"
-                            min=0
-                        >
+                            label="Grace Period In Days"
+                            :min-value="0"
+                        />
                     </div>
                 </div>
 
                 <div class="mt-10 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                     <!-- Total amount -->
                     <div class="sm:col-span-2">
-                        <TextInputWithLabel inputId="total_amount" v-model="form.total_amount" label="Total amount"
-                            inputType="number" />
+                        <NumericInput
+                            input-id="total_amount"
+                            v-model="form.total_amount"
+                            label="Total amount"
+                            :min-value="0"
+                        />
                     </div>
                 </div>
 

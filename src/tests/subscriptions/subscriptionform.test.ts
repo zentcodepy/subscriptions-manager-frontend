@@ -53,8 +53,8 @@ describe("Subscription Create Form", () => {
 
         expect(axios.post).toHaveBeenCalledWith("/base-url/api/subscriptions", {
             "date_from": "2023-11-07",
-            "duration_in_months": 2,
-            "grace_period_in_days": 0,
+            "duration_in_months": "2",
+            "grace_period_in_days": "0",
             "total_amount": "400000",
             "payment_service_type": "manual",
             "automatic_notification_enabled": false,
