@@ -1,6 +1,6 @@
 import { describe, expect, it, test, vi } from "vitest";
 import { flushPromises, mount, RouterLinkStub } from "@vue/test-utils";
-import { Customer } from "../../types/Customer.js";
+import { ListCustomerData } from "../../types/Customers/ListCustomerData";
 import axios from "axios";
 import List from "../../pages/Customers/List.vue";
 
@@ -14,9 +14,9 @@ function getCustomerMock() {
                 { id: 2, business_name: "Company 2", document_number: "222000-1" },
             ]
     };
-};
+}
 
-const customersMock: { 'data': Customer[] } = getCustomerMock();
+const customersMock: { 'data': ListCustomerData[] } = getCustomerMock();
 
 (axios as any).get.mockResolvedValue({
     status: 200,
