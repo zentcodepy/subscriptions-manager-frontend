@@ -6,7 +6,7 @@ import ServiceList from "../../pages/Services/ServiceList.vue";
 
 vi.mock("axios");
 
-function getServicesrMockData() {
+function getServicesMockData() {
     return {
         'data':
             [
@@ -16,7 +16,7 @@ function getServicesrMockData() {
     };
 }
 
-const servicesMockData: { 'data': ListServiceData[] } = getServicesrMockData();
+const servicesMockData: { 'data': ListServiceData[] } = getServicesMockData();
 
 (axios as any).get.mockResolvedValue({
     status: 200,
