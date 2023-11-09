@@ -2,6 +2,7 @@ import { describe, expect, test, vi } from "vitest";
 import { flushPromises, mount, RouterLinkStub } from "@vue/test-utils";
 import SubscriptionCreateForm from '../../pages/Subscriptions/SubscriptionCreateForm.vue';
 import axios from "axios";
+import { payment_service_options } from "../../utils/constants/subscriptionsConstants";
 
 vi.mock("axios");
 
@@ -56,7 +57,7 @@ describe("Subscription Create Form", () => {
             "duration_in_months": "2",
             "grace_period_in_days": "0",
             "total_amount": "400000",
-            "payment_service_type": "manual",
+            "payment_service_type": payment_service_options.MANUAL.value,
             "automatic_notification_enabled": false,
             "service_id": 1,
         });

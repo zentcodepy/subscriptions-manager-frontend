@@ -3,6 +3,7 @@ import { describe, expect, test, vi } from "vitest";
 import { flushPromises, mount, RouterLinkStub } from "@vue/test-utils";
 import SubscriptionEditForm from '../../pages/Subscriptions/SubscriptionEditForm.vue';
 import axios from "axios";
+import { payment_service_options } from './../../utils/constants/subscriptionsConstants';
 import { status_options } from "../../utils/constants/subscriptionsConstants";
 
 vi.mock("axios");
@@ -32,7 +33,7 @@ vi.mock("vue-router", async () => {
             date_from: "2023-01-11",
             date_to: "2023-01-12",
             grace_period_in_days: 0,
-            payment_service_type: "manual",
+            payment_service_type: payment_service_options.MANUAL.value,
             automatic_notification_enabled: false,
         },
     }
@@ -54,7 +55,7 @@ describe("Subscription Edit Form", () => {
             "id": subscriptionId,
             "status": status_options[1].id,
             "grace_period_in_days": 0,
-            "payment_service_type": "manual",
+            "payment_service_type": payment_service_options.MANUAL.value,
             "automatic_notification_enabled": false,
         });
     })
