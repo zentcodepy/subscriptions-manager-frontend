@@ -21,12 +21,10 @@ function submit() {
         if (response.status == 201) {
             router.push('/services');
         } else {
-            console.log(response);
             alert('Error');
         }
     })
     .catch(function (error) {
-        console.log(error);
         if (error.response != undefined && error.response.data != undefined) {
             alert(error.response.data.message)
         } else {
