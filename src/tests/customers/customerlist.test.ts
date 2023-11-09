@@ -46,6 +46,8 @@ describe("Customer List", () => {
         expect(axios.get).toHaveBeenCalledTimes(1);
         expect(rows).toHaveLength(2);
         expect(headerColumns[0].text()).toBe('Business Name');
+        expect(headerColumns[1].text()).toBe('Document Number');
+        expect(headerColumns[2].text()).toBe('Actions');
         expect(ColumnsOfFirstRow[0].text()).toBe('Company 1');
         expect(ColumnsOfFirstRow[1].text()).toBe('111000-1');
     });
