@@ -10,7 +10,7 @@ function getCustomerMock() {
     { id: 1, business_name: "Company 1", document_number: "111000-1" },
     { id: 2, business_name: "Company 2", document_number: "222000-1" },
   ];
-};
+}
 
 describe("Customer Service", () => {
   test("makes a GET request to fetch customers", async () => {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineEmits, defineProps, ref } from 'vue';
-import VueMultiselect from 'vue-multiselect'
+import VueMultiselect from 'vue-multiselect';
 import {searchServices} from "../../services/CustomerService";
 import {SearchCustomerData} from "../../types/Customers/SearchCustomerData";
 
