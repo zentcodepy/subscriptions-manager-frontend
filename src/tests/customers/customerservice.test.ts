@@ -1,6 +1,6 @@
-import { beforeEach, describe, expect, test, vi } from "vitest";
-import { Customer } from "../../types/Customer.js";
-import { getCustomers } from "../../services/CustomerService.js";
+import { describe, expect, test, vi } from "vitest";
+import { ListCustomerData } from "../../types/Customers/ListCustomerData";
+import { getCustomers } from "../../services/CustomerService";
 import axios from "axios";
 
 vi.mock("axios");
@@ -14,7 +14,7 @@ function getCustomerMock() {
 
 describe("Customer Service", () => {
   test("makes a GET request to fetch customers", async () => {
-    const customersMock: Customer[] = getCustomerMock();
+    const customersMock: ListCustomerData[] = getCustomerMock();
 
     (axios as any).get.mockResolvedValue({
       data: customersMock,
@@ -33,7 +33,7 @@ describe("Customer Service", () => {
   });
 
   test("makes a GET request to fetch customers with filters", async () => {
-    const customersMock: Customer[] = getCustomerMock();
+    const customersMock: ListCustomerData[] = getCustomerMock();
 
     (axios as any ).get.mockResolvedValue({
       data: customersMock,
