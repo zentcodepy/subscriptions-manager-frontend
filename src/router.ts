@@ -3,6 +3,8 @@ import Customers from './pages/Customers/List.vue';
 import CustomerForm from './pages/Customers/CustomerForm.vue';
 import Dashboard from './components/Dashboard.vue';
 import Login from './components/Login.vue';
+import ServiceList from './pages/Services/ServiceList.vue';
+import ServiceCreateForm from './pages/Services/ServiceCreateForm.vue';
 
 export const routes = [
   {
@@ -25,6 +27,14 @@ export const routes = [
     path: '/customers/:customerId/edit',
     name: 'editCustomer',
     component: CustomerForm,
+  },
+  {
+    path: '/services',
+    component: ServiceList,
+  },
+  {
+    path: '/services/create',
+    component: ServiceCreateForm,
   },
 ];
 

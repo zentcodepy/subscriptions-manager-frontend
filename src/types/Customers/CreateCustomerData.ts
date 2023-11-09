@@ -1,4 +1,4 @@
-export interface CreateCustomer {
+export interface CreateCustomerData {
     business_name: string;
     document_number: string | null;
     contact_name: string | null,
