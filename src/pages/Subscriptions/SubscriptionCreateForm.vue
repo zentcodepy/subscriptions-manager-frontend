@@ -48,6 +48,10 @@ function formatData() {
 }
 
 function submit() {
+    if (selectedService.value == undefined) {
+        alert("Service is required");
+        return;
+    }
     formatData();
     createSubscription(form.value)
     .then((response) => {
@@ -55,7 +59,7 @@ function submit() {
             router.push('/subscriptions');
         } else {
             console.log(response);
-            alert('Error');
+            alert("Error");
         }
     })
     .catch(function (error) {
