@@ -4,12 +4,12 @@ import { ref } from 'vue';
 import { CreateSubscriptionData } from '../../types/Subscriptions/CreateSubscriptionData';
 import router from '../../router';
 import { createSubscription, getServicesOptions } from '../../services/SubscriptionService';
-import InputLabel from '../../components/common/InputLabel.vue';
 import TextInputWithLabel from '../../components/common/TextInputWithLabel.vue';
 import PaymentServiceTypeSelection from '../Subscriptions/Partials/PaymentServiceTypeSelection.vue';
 import PrimaryButton from '../../components/common/PrimaryButton.vue';
 import VueMultiselect from 'vue-multiselect';
 import NumericInput from '../../components/common/NumericInput.vue';
+import CheckboxInput from '../../components/common/CheckboxInput.vue';
 
 // TODO:Check if user is logged in
 
@@ -142,13 +142,11 @@ function submit() {
                 <div class="mt-10 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                     <!-- Automatic notification enabled -->
                     <div class="sm:col-span-2">
-                        <InputLabel for="automatic_notification_enabled" text="Automatic notification enabled"></InputLabel>
-                        <input 
-                            type="checkbox"
-                            id="automatic_notification_enabled"
-                            name="automatic_notification_enabled"
+                        <CheckboxInput 
+                            inputId="automatic_notification_enabled"
                             v-model="form.automatic_notification_enabled"
-                        >
+                            label="Automatic notification enabled"
+                        />
                     </div>
                 </div>
             </div>
