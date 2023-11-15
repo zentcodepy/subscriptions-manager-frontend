@@ -1,4 +1,4 @@
-import { describe, expect, it, test, vi } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { flushPromises, mount, RouterLinkStub } from "@vue/test-utils";
 import { SearchCustomerData } from "../../types/Customers/SearchCustomerData";
 import axios from "axios";
@@ -45,9 +45,7 @@ describe("Customer Search Input", () => {
             },
         });
 
-        expect(vueMultiselect.vm.options).toStrictEqual(customersMockData);
-
-        console.log(vueMultiselect.vm.options);
+        expect(((vueMultiselect.vm as any).options)).toStrictEqual(customersMockData);
 
         // expect(rows).toHaveLength(2);
         // expect(headerColumns[0].text()).toBe('Business Name');

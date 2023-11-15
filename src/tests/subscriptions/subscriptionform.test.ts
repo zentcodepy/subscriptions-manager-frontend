@@ -48,7 +48,7 @@ describe("Subscription Create Form", () => {
         form.find('input[id="total_amount"]').setValue(400000);
         form.find('input[id="manual"]').setValue(true);
         form.find('input[id="automatic_notification_enabled"]').setValue(false);
-        wrapper.vm.selectedService = wrapper.vm.servicesOptions[0];
+        (wrapper.vm as any).selectedService = (wrapper.vm as any).servicesOptions[0];
 
         form.trigger("submit.prevent");
 
