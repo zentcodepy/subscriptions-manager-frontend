@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { defineProps, defineEmits } from 'vue';
+
     defineProps({
         inputId: String,
         inputName: String,
@@ -7,7 +9,11 @@
         value: String,
     })
 
-    defineEmits(['update:modelValue'])
+    const emit = defineEmits(['update:modelValue']);
+
+  const updateModelValue = (e: Event) => {
+      emit('update:modelValue', (e.target as HTMLInputElement).value)
+  };
 </script>
 <template>
     <input
@@ -16,7 +22,7 @@
         :id="inputId"
         :name="inputName"
         :value="value"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="updateModelValue"
     >
     <label
         class="ml-2 font-medium text-sm"
