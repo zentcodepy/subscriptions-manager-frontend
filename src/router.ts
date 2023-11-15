@@ -3,6 +3,9 @@ import Customers from './pages/Customers/List.vue';
 import CustomerForm from './pages/Customers/CustomerForm.vue';
 import Dashboard from './components/Dashboard.vue';
 import Login from './components/Login.vue';
+import Subscriptions from './pages/Subscriptions/List.vue';
+import SubscriptionCreateForm from './pages/Subscriptions/SubscriptionCreateForm.vue';
+import SubscriptionEditForm from './pages/Subscriptions/SubscriptionEditForm.vue';
 import ServiceList from './pages/Services/ServiceList.vue';
 import ServiceCreateForm from './pages/Services/ServiceCreateForm.vue';
 
@@ -27,6 +30,18 @@ export const routes = [
     path: '/customers/:customerId/edit',
     name: 'editCustomer',
     component: CustomerForm,
+  },
+  {
+    path: '/subscriptions',
+    component: Subscriptions,
+  },
+  {
+    path: '/subscriptions/create',
+    component: SubscriptionCreateForm,
+  },
+  {
+    path: '/subscriptions/:subscriptionId/edit',
+    component: SubscriptionEditForm,
   },
   {
     path: '/services',
