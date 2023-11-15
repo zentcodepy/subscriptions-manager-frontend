@@ -2,7 +2,7 @@ import { describe, expect, it, test, vi } from "vitest";
 import { flushPromises, mount, RouterLinkStub } from "@vue/test-utils";
 import { SearchCustomerData } from "../../types/Customers/SearchCustomerData";
 import axios from "axios";
-import CustomerSearchInput from "../../components/Customers/CustomerSearchInput.vue";
+import CustomerSearchInput from "../../components/customers/CustomerSearchInput.vue";
 import VueMultiselect from 'vue-multiselect';
 
 vi.mock("axios");
