@@ -1,31 +1,31 @@
 import { describe, expect, it, test, vi } from "vitest";
 import { flushPromises, mount, RouterLinkStub } from "@vue/test-utils";
-import { ListCustomerData } from "../../types/Customers/ListCustomerData";
+import { ListServiceData } from "../../types/Services/ListServiceData";
 import axios from "axios";
-import List from "../../pages/Customers/List.vue";
+import ServiceList from "../../pages/Services/ServiceList.vue";
 
 vi.mock("axios");
 
-function getCustomerMock() {
+function getServicesMockData() {
     return {
         'data':
             [
-                { id: 1, business_name: "Company 1", document_number: "111000-1" },
-                { id: 2, business_name: "Company 2", document_number: "222000-1" },
+                { id: 1, name: "Service 1", status: "Active", customer_name: "Company A" },
+                { id: 2, name: "Service 2", status: "Cancelled", customer_name: "Company B" },
             ]
     };
 }
 
-const customersMock: { 'data': ListCustomerData[] } = getCustomerMock();
+const servicesMockData: { 'data': ListServiceData[] } = getServicesMockData();
 
 (axios as any).get.mockResolvedValue({
     status: 200,
-    data: customersMock,
+    data: servicesMockData,
 });
 
-describe("Customer List", () => {
+describe("Services List", () => {
     test("Renders data inside table", async () => {
-        const wrapper = mount(List, {
+        const wrapper = mount(ServiceList, {
             global: {
                 stubs: {
                     RouterLink: RouterLinkStub,
@@ -45,10 +45,11 @@ describe("Customer List", () => {
 
         expect(axios.get).toHaveBeenCalledTimes(1);
         expect(rows).toHaveLength(2);
-        expect(headerColumns[0].text()).toBe('Business Name');
-        expect(headerColumns[1].text()).toBe('Document Number');
-        expect(headerColumns[2].text()).toBe('Actions');
-        expect(ColumnsOfFirstRow[0].text()).toBe('Company 1');
-        expect(ColumnsOfFirstRow[1].text()).toBe('111000-1');
+        expect(headerColumns[0].text()).toBe('Service');
+        expect(headerColumns[1].text()).toBe('Customer');
+        expect(headerColumns[2].text()).toBe('Status');
+        expect(ColumnsOfFirstRow[0].text()).toBe('Service 1');
+        expect(ColumnsOfFirstRow[1].text()).toBe('Company A');
+        expect(ColumnsOfFirstRow[2].text()).toBe('Active');
     });
 });

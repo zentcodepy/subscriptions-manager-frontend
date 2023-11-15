@@ -13,6 +13,16 @@ export async function getCustomers(inputValue?: string, pageNumber?: number) {
     return response;
 }
 
+export async function searchServices(search?: string) {
+    const url = '/base-url/api/customers/search';
+    return await axios
+        .get(url, {
+            params: {
+                search: search,
+            }
+        });
+}
+
 export async function getCustomer(customerId: string) {
     const url = '/base-url/api/customers/' + customerId;
     const response = await axios

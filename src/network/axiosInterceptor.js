@@ -37,6 +37,7 @@ export function interceptResponse() {
           break;
         case 403:
           router.push("/login");
+          break;
         default:
           alert("error");
           break;

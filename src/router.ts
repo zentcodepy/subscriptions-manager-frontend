@@ -6,6 +6,8 @@ import Login from './components/Login.vue';
 import Subscriptions from './pages/Subscriptions/List.vue';
 import SubscriptionCreateForm from './pages/Subscriptions/SubscriptionCreateForm.vue';
 import SubscriptionEditForm from './pages/Subscriptions/SubscriptionEditForm.vue';
+import ServiceList from './pages/Services/ServiceList.vue';
+import ServiceCreateForm from './pages/Services/ServiceCreateForm.vue';
 
 export const routes = [
   {
@@ -40,7 +42,15 @@ export const routes = [
   {
     path: '/subscriptions/:subscriptionId/edit',
     component: SubscriptionEditForm,
-  }
+  },
+  {
+    path: '/services',
+    component: ServiceList,
+  },
+  {
+    path: '/services/create',
+    component: ServiceCreateForm,
+  },
 ];
 
 const router = createRouter({
