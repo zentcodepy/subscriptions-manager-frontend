@@ -19,11 +19,11 @@ const form = ref<any>({
 const formTitle = 'Edit Subscription';
 const route = useRoute();
 const subscriptionId = ref('');
-let subscriptionData = ref({});
+let subscriptionData: any = ref({});
 let statusOptions: any = ref([{ id: '', name: '' }]);
 let selectedStatus = ref();
 
-subscriptionId.value = route.params.subscriptionId;
+subscriptionId.value = route.params.subscriptionId as string;
 getStatusOptionsData();
 getSubscriptionData(subscriptionId.value);
 
@@ -36,7 +36,7 @@ function getSubscriptionData(subscriptionId: string) {
         .then((response) => {
             if (response.status == 200) {
                 subscriptionData.value = response.data.data;
-                selectedStatus.value = statusOptions.value.find(obj => obj.id === subscriptionData.value.status);
+                selectedStatus.value = statusOptions.value.find((obj: any) => obj.id === subscriptionData.value.status);
                 setFormValues();
             } else {
                 alert("error");

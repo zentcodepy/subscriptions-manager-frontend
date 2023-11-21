@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppLayout from '../../components/AppLayout.vue';
 import { computed, ref } from 'vue';
-import { CreateCustomer } from '../../types/CreateCustomer';
+import { CreateCustomerData } from '../../types/Customers/CreateCustomerData';
 import router from '../../router';
 import { useRoute } from 'vue-router';
 import { createCustomer, getCustomer, updateCustomer } from '../../services/CustomerService.ts';
@@ -12,21 +12,21 @@ import PrimaryButton from '../../components/common/PrimaryButton.vue';
 const editForm = ref(false);
 const customerId = ref('');
 
-const form = ref<CreateCustomer>({
+const form = ref<CreateCustomerData>({
     business_name: '',
     document_number: '',
-    contact_name: null,
-    phone_number: null,
-    email: null,
-    address: null,
-    comments: null
+    contact_name: undefined,
+    phone_number: undefined,
+    email: undefined,
+    address: undefined,
+    comments: undefined
 });
 
 const route = useRoute();
 
 if (route?.params?.customerId) {
     editForm.value = true;
-    customerId.value = route.params.customerId;
+    customerId.value = route.params.customerId as string;
     getCustomerData(customerId.value);
 }
 

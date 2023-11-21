@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineEmits, defineProps, ref } from 'vue';
+import { defineEmits, ref } from 'vue';
 import VueMultiselect from 'vue-multiselect';
 import {searchServices} from "../../services/CustomerService";
 import {SearchCustomerData} from "../../types/Customers/SearchCustomerData";
@@ -7,7 +7,11 @@ import {SearchCustomerData} from "../../types/Customers/SearchCustomerData";
 const selected = ref('');
 const customers = ref<SearchCustomerData[]>([]);
 
-defineEmits(['update:customer-id'])
+const emit = defineEmits(['update:customer-id'])
+
+const updateModelValue = (e: any) => {
+  emit('update:customer-id', (e.id));
+};
 
 function getCustomers(search: string) {
   searchServices(search)
@@ -34,7 +38,7 @@ function getCustomers(search: string) {
         label="business_name"
         track-by="id"
         @search-change="getCustomers"
-        @select="$emit('update:customer-id', $event.id)"
+        @select="updateModelValue"
     >
     </VueMultiselect>
 </template>

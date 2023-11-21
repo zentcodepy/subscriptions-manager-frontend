@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { defineProps, defineEmits } from 'vue';
 import InputLabel from '../../components/common/InputLabel.vue';
 
 defineProps({
@@ -7,7 +8,12 @@ defineProps({
     modelValue: Boolean
 });
 
-defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue']);
+
+const updateModelValue = (e: Event) => {
+  emit('update:modelValue', (e.target as HTMLInputElement).checked)
+};
+
 </script>
 <template>
     <InputLabel 
@@ -17,6 +23,6 @@ defineEmits(['update:modelValue']);
     <input
         type="checkbox"
         :id="inputId"
-        @input="$emit('update:modelValue', $event.target.checked)"
+        @input="updateModelValue"
     >
 </template>

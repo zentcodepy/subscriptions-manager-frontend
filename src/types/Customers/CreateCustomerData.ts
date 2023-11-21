@@ -1,9 +1,9 @@
 export interface CreateCustomerData {
     business_name: string;
-    document_number: string | null;
-    contact_name: string | null,
-    phone_number: string | null,
-    email: string | null,
-    address: string | null,
-    comments: string | null,
+    document_number: string | undefined;
+    contact_name: string | undefined,
+    phone_number: string | undefined,
+    email: string | undefined,
+    address: string | undefined,
+    comments: string | undefined,
 }

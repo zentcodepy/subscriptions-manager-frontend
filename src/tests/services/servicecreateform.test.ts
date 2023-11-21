@@ -1,4 +1,4 @@
-import { describe, expect, it, test, vi } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { flushPromises, mount, RouterLinkStub } from "@vue/test-utils";
 import ServiceCreateForm from "../../pages/Services/ServiceCreateForm.vue";
 import CustomerSearchInput from "../../components/customers/CustomerSearchInput.vue";

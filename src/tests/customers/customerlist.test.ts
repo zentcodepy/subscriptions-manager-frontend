@@ -1,8 +1,8 @@
-import { describe, expect, it, test, vi } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { flushPromises, mount, RouterLinkStub } from "@vue/test-utils";
 import { ListCustomerData } from "../../types/Customers/ListCustomerData";
 import axios from "axios";
-import List from "../../pages/Customers/List.vue";
+import CustomerList from "../../pages/Customers/CustomerList.vue";
 
 vi.mock("axios");
 
@@ -25,7 +25,7 @@ const customersMock: { 'data': ListCustomerData[] } = getCustomerMock();
 
 describe("Customer List", () => {
     test("Renders data inside table", async () => {
-        const wrapper = mount(List, {
+        const wrapper = mount(CustomerList, {
             global: {
                 stubs: {
                     RouterLink: RouterLinkStub,

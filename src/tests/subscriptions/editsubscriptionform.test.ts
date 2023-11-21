@@ -1,9 +1,8 @@
-import { status_options } from './../../utils/constants/subscriptionsConstants';
 import { describe, expect, test, vi } from "vitest";
-import { flushPromises, mount, RouterLinkStub } from "@vue/test-utils";
+import { flushPromises, mount } from "@vue/test-utils";
 import SubscriptionEditForm from '../../pages/Subscriptions/SubscriptionEditForm.vue';
 import axios from "axios";
-import { payment_service_options } from './../../utils/constants/subscriptionsConstants';
+import { payment_service_options } from '../../utils/constants/subscriptionsConstants';
 import { status_options } from "../../utils/constants/subscriptionsConstants";
 
 vi.mock("axios");
@@ -46,8 +45,8 @@ describe("Subscription Edit Form", () => {
         await flushPromises();
 
         const form = wrapper.find('form');
-        wrapper.vm.selectedStatus = status_options[1];
-        const subscriptionId = wrapper.vm.subscriptionId;
+        (wrapper.vm as any).selectedStatus = status_options[1];
+        const subscriptionId = (wrapper.vm as any).subscriptionId;
 
         form.trigger("submit.prevent");
 

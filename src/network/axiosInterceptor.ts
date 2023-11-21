@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useRouter } from "vue-router";
+import NProgress from 'nprogress';
 
 export function interceptResponse() {
   const router = useRouter();

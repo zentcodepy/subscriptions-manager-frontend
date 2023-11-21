@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Customers from './pages/Customers/List.vue';
+import CustomerList from './pages/Customers/CustomerList.vue';
 import CustomerForm from './pages/Customers/CustomerForm.vue';
 import Dashboard from './components/Dashboard.vue';
 import Login from './components/Login.vue';
@@ -20,7 +20,7 @@ export const routes = [
   },
   {
     path: '/customers',
-    component: Customers,
+    component: CustomerList,
   },
   {
     path: '/customers/create',

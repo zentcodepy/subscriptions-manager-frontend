@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppLayout from '../../components/AppLayout.vue';
 import { ref, onMounted } from 'vue';
-import { Customer } from '../../types/Customer';
+import { ListCustomerData } from '../../types/Customers/ListCustomerData';
 import { Pagination } from '../../types/Pagination';
 import CustomerFilters from './Partials/CustomerFilters.vue';
 import ListPagination from '../../components/common/ListPagination.vue';
@@ -15,7 +15,7 @@ const paginationData = ref<Pagination>({
     currentPage: 0,
     pagesNumber: 0,
 });
-const customers = ref<Customer[]>([]);
+const customers = ref<ListCustomerData[]>([]);
 
 onMounted(() => {
     fetchCustomers()

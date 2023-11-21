@@ -1,8 +1,12 @@
 <script setup lang="ts">
+import { defineProps } from 'vue';
 import InputLabel from '../../components/common/InputLabel.vue';
 
 defineProps({
-    subscriptionData: Object,
+    subscriptionData: {
+        type: Object,
+        required: true,
+    }
 })
 </script>
 <template>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { defineProps, defineEmits } from 'vue';
 
 defineProps({
     inputId: String,
@@ -6,6 +7,13 @@ defineProps({
     minValue: Number,
     modelValue: String,
 })
+
+const emit = defineEmits(['update:modelValue']);
+
+const updateModelValue = (e: Event) => {
+  emit('update:modelValue', (e.target as HTMLInputElement).value)
+};
+
 </script>
 <template>
     <label
@@ -20,7 +28,7 @@ defineProps({
         type="number"
         :id="inputId"
         v-bind:value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="updateModelValue"
         :min=minValue
     >
 </template>
