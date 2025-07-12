@@ -17,11 +17,11 @@ const paginationData = ref<Pagination>({
 const subscriptions = ref<SubscriptionData[]>([]);
 
 onMounted(() => {
-    fetchSubscriptions()
+    fetchSubscriptions(undefined,'active')
 });
 
-function fetchSubscriptions(pageNumber?: number) {
-    getSubscriptions(pageNumber)
+function fetchSubscriptions(pageNumber?: number, status?: string) {
+    getSubscriptions(pageNumber, status)
         .then((response) => {
             if (response.status == 200) {
                 const { data, meta } = response.data;
@@ -46,10 +46,34 @@ function setPaginationData(meta: any) {
 function noRegisters() {
     return subscriptions.value == undefined || subscriptions.value.length == 0;
 }
+
+function handleStatus(event: any) {
+    const status = event.target.value;
+    fetchSubscriptions(undefined, status);
+}
 </script>
 <template>
     <AppLayout>
         <div class="m-5">
+
+            <!-- Status Filter -->
+            <div class="ml-5 mt-10">
+                <label for="status" class="block text-sm/6 font-medium text-gray-900">Status</label>
+
+                <div class="mt-2 grid grid-cols-6">
+                    <select
+                        name="status"
+                        id="status"
+                        @change="handleStatus($event)"
+                        class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                    >
+                        <option value="active">Active</option>
+                        <option value="pending">Pending</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="text-right mr-5">
                 <router-link 
                     to="subscriptions/create" 
