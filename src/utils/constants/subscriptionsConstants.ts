@@ -13,6 +13,21 @@ export const status_options = [
     },
 ];
 
+export const susbscription_status = {
+    ACTIVE: {
+        label: 'Active',
+        value: 'active',
+    },
+    PENDING: {
+        label: 'Pending',
+        value: 'pending',
+    },
+    INACTIVE: {
+        label: 'Inactive',
+        value: 'inactive',
+    }
+}
+
 export const payment_service_options = {
     MANUAL: {
         label: "Manual",

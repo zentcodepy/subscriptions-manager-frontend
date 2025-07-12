@@ -6,6 +6,7 @@ import { Pagination } from '../../types/Pagination';
 import ListPagination from '../../components/common/ListPagination.vue';
 import { getSubscriptions } from '../../services/SubscriptionService';
 import ButtonLink from '../../components/common/ButtonLink.vue';
+import { susbscription_status } from '../../utils/constants/subscriptionsConstants';
 
 const paginationData = ref<Pagination>({
     from: 0,
@@ -17,7 +18,7 @@ const paginationData = ref<Pagination>({
 const subscriptions = ref<SubscriptionData[]>([]);
 
 onMounted(() => {
-    fetchSubscriptions(undefined,'active')
+    fetchSubscriptions(undefined, susbscription_status.ACTIVE.value)
 });
 
 function fetchSubscriptions(pageNumber?: number, status?: string) {
@@ -67,9 +68,12 @@ function handleStatus(event: any) {
                         @change="handleStatus($event)"
                         class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                     >
-                        <option value="active">Active</option>
-                        <option value="pending">Pending</option>
-                        <option value="inactive">Inactive</option>
+                        <option
+                            v-for="status in susbscription_status"
+                            :value="status.value"
+                        >
+                            {{ status.label }}
+                        </option>
                     </select>
                 </div>
             </div>
