@@ -1,12 +1,13 @@
 import axios from "axios";
 import { status_options } from "../utils/constants/subscriptionsConstants";
 
-export async function getSubscriptions(pageNumber?: number) {
+export async function getSubscriptions(pageNumber?: number, status?: string) {
     const url = '/base-url/api/subscriptions';
     const response = await axios
         .get(url, {
             params: {
                 page: pageNumber,
+                status: status,
             }
         });
 
