@@ -3,7 +3,7 @@ import CustomerList from './pages/Customers/CustomerList.vue';
 import CustomerForm from './pages/Customers/CustomerForm.vue';
 import Dashboard from './components/Dashboard.vue';
 import Login from './components/Login.vue';
-import Subscriptions from './pages/Subscriptions/List.vue';
+import Subscriptions from './pages/Subscriptions/SubscriptionList.vue';
 import SubscriptionCreateForm from './pages/Subscriptions/SubscriptionCreateForm.vue';
 import SubscriptionEditForm from './pages/Subscriptions/SubscriptionEditForm.vue';
 import ServiceList from './pages/Services/ServiceList.vue';
