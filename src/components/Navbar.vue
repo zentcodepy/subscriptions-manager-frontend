@@ -1,4 +1,21 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+function logout() {
+    const url = '/base-url/api/logout';
+    axios.post(url)
+        .then(response => {
+            if (response.status == 200) {
+                router.push('/login');
+            }
+        }).catch(error => {
+            console.log(error)
+        })
+}
+</script>
 <template>
     <nav class="bg-indigo-600">
         <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -48,6 +65,12 @@
                             </router-link>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <button class="text-white rounded-md px-3 py-2 text-sm font-medium hover:bg-indigo-700"
+                            @click="logout">
+                        Logout
+                    </button>
                 </div>
             </div>
         </div>
